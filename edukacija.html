@@ -96,10 +96,12 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('assets/IMG_8897.jpg') center 20% / cover no-repeat;
+    background: url('assets/IMG_5607.jpg') right 15% / auto 110% no-repeat;
     transform: scale(1.05);
     transition: transform 0.1s linear;
     will-change: transform;
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 75%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 75%);
   }
 
   .hero-overlay {
@@ -108,9 +110,8 @@
     background: linear-gradient(
       to bottom,
       rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0) 30%,
-      rgba(255,255,255,0.6) 65%,
-      rgba(255,255,255,0.95) 85%,
+      rgba(255,255,255,0) 50%,
+      rgba(255,255,255,0.7) 80%,
       rgba(255,255,255,1) 100%
     );
   }
@@ -234,6 +235,24 @@
     font-size: 10px;
     letter-spacing: 0.22em;
     color: #999;
+  }
+
+  /* FULL WIDTH SEKCIJA */
+  .full-section {
+    padding: 4rem 3rem;
+    border-bottom: 1px solid #C8C8C8;
+    background: #EBEBEB;
+  }
+
+  .full-section-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 2rem;
+  }
+
+  .full-section-left .sec-body {
+    max-width: 100%;
   }
 
   /* SEKCIJA S FOTOGRAFIJOM */
@@ -388,6 +407,39 @@
     line-height: 1.7;
   }
 
+  /* FOTO PRIJELAZ */
+  .photo-transition {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    background: #2A2A2A;
+  }
+
+  .photo-transition img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    opacity: 0.85;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0.6) 15%,
+      rgba(0,0,0,1) 40%,
+      rgba(0,0,0,1) 70%,
+      rgba(0,0,0,0) 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0.6) 15%,
+      rgba(0,0,0,1) 40%,
+      rgba(0,0,0,1) 70%,
+      rgba(0,0,0,0) 100%
+    );
+  }
+
   /* KONTAKT */
   .contact {
     padding: 6rem 3rem;
@@ -489,7 +541,7 @@
 <nav class="nav">
   <a href="index.html" class="nav-back">← NATRAG</a>
   <span class="nav-logo">Marinko Leš</span>
-  <a href="#kontakt" class="nav-cta">POŠALJI UPIT</a>
+  <a href="mailto:marinkoles@gmail.com" class="nav-cta">POŠALJI UPIT</a>
 </nav>
 
 <!-- HERO -->
@@ -549,32 +601,19 @@
 </div>
 
 <!-- PODRUČJA RADA -->
-<div class="photo-section">
-  <div class="text-col">
-    <div class="sec-tag reveal">PODRUČJA RADA</div>
-    <div class="sec-title reveal reveal-d1">Tijelo.<br><em>Glas.</em><br>Poruka.</div>
-    <p class="sec-body reveal reveal-d2">Cilj nije naučiti ljude da glume, nego da jasnije koriste glas, tijelo, pažnju i strukturu poruke — tako da u važnim situacijama djeluju prisutno, sabrano i uvjerljivo.</p>
+<div class="full-section">
+  <div class="sec-tag reveal">PODRUČJA RADA</div>
+  <div class="full-section-inner">
+    <div class="full-section-left">
+      <div class="sec-title reveal reveal-d1">Tijelo.<br><em>Glas.</em><br>Poruka.</div>
+      <p class="sec-body reveal reveal-d2">Cilj nije naučiti ljude da glume, nego da jasnije koriste glas, tijelo, pažnju i strukturu poruke — tako da u važnim situacijama djeluju prisutno, sabrano i uvjerljivo.</p>
+    </div>
     <div class="areas reveal reveal-d3">
       <div class="area"><div class="area-name">GLAS</div><div class="area-text">Jasnoća, artikulacija, tempo, dah, boja i volumen.</div></div>
       <div class="area"><div class="area-name">PRISUTNOST</div><div class="area-text">Fokus, trema, tijelo, kontakt s publikom.</div></div>
       <div class="area"><div class="area-name">IZVEDBA</div><div class="area-text">Ritam, pauza, naglasak, energija.</div></div>
       <div class="area"><div class="area-name">POD PRITISKOM</div><div class="area-text">Pitch, panel, intervju, medijski nastup.</div></div>
     </div>
-  </div>
-  <div class="photo-col" id="photoCol1">
-    <img src="assets/IMG_8897.jpg" alt="Marinko Leš predavanje"/>
-  </div>
-</div>
-
-<!-- GLAS SEKCIJA -->
-<div class="photo-section reverse">
-  <div class="text-col">
-    <div class="sec-tag reveal">GLAS</div>
-    <div class="sec-title reveal reveal-d1">Studio.<br><em>Scena.</em><br>Ekran.</div>
-    <p class="sec-body reveal reveal-d2">Profesionalni voice-over, naracija, reklame, dokumentarni i korporativni formati. Iskustvo nacionalne televizije i kazališne scene spajaju tehničku preciznost, interpretaciju i osjećaj za ritam govora.</p>
-  </div>
-  <div class="photo-col" id="photoCol2">
-    <img src="assets/IMG_8896.jpg" alt="Marinko Leš studio"/>
   </div>
 </div>
 
@@ -603,13 +642,18 @@
   </div>
 </div>
 
+<!-- FOTO PRIJELAZ -->
+<div class="photo-transition">
+  <img src="assets/IMG_5734.jpg" alt="Marinko Leš"/>
+</div>
+
 <!-- KONTAKT -->
 <section class="contact" id="kontakt">
   <div class="contact-pre reveal">KONTAKT</div>
   <div class="contact-title reveal reveal-d1">Počnimo</div>
   <div class="contact-title reveal reveal-d2"><em>razgovor.</em></div>
   <p class="contact-sub reveal reveal-d3">Pošalji upit s kratkim opisom potreba,<br>brojem sudionika i željenim formatom.</p>
-  <button class="contact-btn reveal reveal-d4" onclick="window.location.href='mailto:marinko@marinkoles.com'">POŠALJI UPIT →</button>
+  <button class="contact-btn reveal reveal-d4" onclick="window.location.href='mailto:marinkoles@gmail.com'">POŠALJI UPIT →</button>
 </section>
 
 <footer class="edu-footer">
