@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edukacija — Marinko Leš</title>
+<meta name="description" content="Radionice, intenzivi i individualni rad za profesionalce koji žele govoriti jasnije, sigurnije i uvjerljivije.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --white: #FFFFFF;
+    --off: #F5F5F5;
+    --light: #EBEBEB;
+    --border: #E0E0E0;
+    --muted: #999;
+    --dim: #BBB;
+    --dark: #111111;
+    --accent: #FF4500;
+    --serif: 'Fraunces', serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--dark);
+    font-family: var(--mono);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-back {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--dark); }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--dark);
+    font-style: italic;
+  }
+
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    background: var(--accent);
+    padding: 0.6rem 1.4rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('assets/IMG_8897.jpg') center 20% / cover no-repeat;
+    transform: scale(1.05);
+    transition: transform 0.1s linear;
+    will-change: transform;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0) 30%,
+      rgba(255,255,255,0.6) 65%,
+      rgba(255,255,255,0.95) 85%,
+      rgba(255,255,255,1) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 3rem;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(72px, 12vw, 130px);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 2.5rem;
+    gap: 2rem;
+  }
+
+  .hero-desc {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 380px;
+  }
+
+  .hero-cta {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    background: var(--accent);
+    padding: 1rem 2.2rem;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+
+  .hero-cta:hover { opacity: 0.85; }
+
+  /* MARQUEE */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--off);
+    padding: 0.9rem 0;
+  }
+
+  .marquee-inner {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 25s linear infinite;
+  }
+
+  .marquee-item {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--dim);
+    padding: 0 2.5rem;
+  }
+
+  .marquee-item span { color: var(--accent); }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* STATS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid #D8D8D8;
+    background: #F5F5F5;
+  }
+
+  .stat {
+    padding: 3rem;
+    border-right: 1px solid #D8D8D8;
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-num em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: #999;
+  }
+
+  /* SEKCIJA S FOTOGRAFIJOM */
+  .photo-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+    border-bottom: 1px solid #C8C8C8;
+    background: #EBEBEB;
+  }
+
+  .photo-section.reverse { direction: rtl; }
+  .photo-section.reverse > * { direction: ltr; }
+
+  .photo-col {
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .photo-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transform: scale(1.05);
+    transition: transform 0.8s ease;
+  }
+
+  .photo-col.revealed img {
+    transform: scale(1);
+  }
+
+  .text-col {
+    padding: 4rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid #C8C8C8;
+  }
+
+  .photo-section.reverse .text-col {
+    border-right: none;
+    border-left: 1px solid #C8C8C8;
+  }
+
+  .sec-tag {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .sec-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .sec-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .sec-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .sec-body {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+
+  /* GRID PODRUČJA */
+  .areas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    margin-top: 0.5rem;
+  }
+
+  .area {
+    padding: 1.2rem 1rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .area-name {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .area-text {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* FORMATI */
+  .formats-section {
+    padding: 4rem 3rem;
+    border-bottom: 1px solid #AAA;
+    background: #2A2A2A;
+  }
+
+  .formats-section .sec-tag { color: #666; }
+  .formats-section .sec-tag::after { background: #444; }
+
+  .format {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #3A3A3A;
+    align-items: baseline;
+  }
+
+  .format:last-child { border-bottom: none; }
+
+  .format-num {
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 0.1em;
+    min-width: 28px;
+  }
+
+  .format-name {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: #F0F0F0;
+    min-width: 180px;
+  }
+
+  .format-desc {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.7;
+  }
+
+  /* KONTAKT */
+  .contact {
+    padding: 6rem 3rem;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+    background: #0A0A0A;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-pre {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 300;
+    line-height: 0.95;
+    color: #F5F0EB;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .contact-sub {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .contact-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: #0A0A0A;
+    background: var(--accent);
+    padding: 1.2rem 3.5rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .contact-btn:hover { opacity: 0.85; }
+
+  /* ANIMACIJE */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.35s; }
+  .reveal-d4 { transition-delay: 0.5s; }
+
+  /* FOOTER */
+  .edu-footer {
+    padding: 1.5rem 3rem;
+    border-top: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0A0A0A;
+  }
+
+  .edu-footer-left {
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 0.1em;
+  }
+
+  .edu-footer-right a {
+    font-size: 11px;
+    color: #444;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+
+  .edu-footer-right a:hover { color: #F5F0EB; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-back">← NATRAG</a>
+  <span class="nav-logo">Marinko Leš</span>
+  <a href="#kontakt" class="nav-cta">POŠALJI UPIT</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag reveal">MARINKO LEŠ · EDUKACIJA · 2026</div>
+    <div class="hero-title reveal reveal-d1">Glas</div>
+    <div class="hero-title reveal reveal-d2"><em>prije</em></div>
+    <div class="hero-title reveal reveal-d3">svega.</div>
+    <div class="hero-bottom">
+      <p class="hero-desc reveal reveal-d3">Radionice, intenzivi i individualni rad za profesionalce koji žele govoriti jasnije, sigurnije i uvjerljivije — u dvoranama, boardroomima i pred kamerama.</p>
+      <button class="hero-cta reveal reveal-d4" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">POŠALJI UPIT →</button>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span class="marquee-item">GLAS <span>·</span></span>
+    <span class="marquee-item">IZVEDBA <span>·</span></span>
+    <span class="marquee-item">PRISUTNOST <span>·</span></span>
+    <span class="marquee-item">JAVNI NASTUP <span>·</span></span>
+    <span class="marquee-item">PREZENTACIJE <span>·</span></span>
+    <span class="marquee-item">KOMUNIKACIJA POD PRITISKOM <span>·</span></span>
+    <span class="marquee-item">BOARDROOM <span>·</span></span>
+    <span class="marquee-item">KAMERA <span>·</span></span>
+    <span class="marquee-item">MIKROFON <span>·</span></span>
+    <span class="marquee-item">GLAS <span>·</span></span>
+    <span class="marquee-item">IZVEDBA <span>·</span></span>
+    <span class="marquee-item">PRISUTNOST <span>·</span></span>
+    <span class="marquee-item">JAVNI NASTUP <span>·</span></span>
+    <span class="marquee-item">PREZENTACIJE <span>·</span></span>
+    <span class="marquee-item">KOMUNIKACIJA POD PRITISKOM <span>·</span></span>
+    <span class="marquee-item">BOARDROOM <span>·</span></span>
+    <span class="marquee-item">KAMERA <span>·</span></span>
+    <span class="marquee-item">MIKROFON <span>·</span></span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">20<em>+</em></div>
+    <div class="stat-label">GODINA ISKUSTVA</div>
+  </div>
+  <div class="stat reveal reveal-d1">
+    <div class="stat-num"><em>4</em></div>
+    <div class="stat-label">PLATFORME RADA</div>
+  </div>
+  <div class="stat reveal reveal-d2">
+    <div class="stat-num">1</div>
+    <div class="stat-label">GLAS</div>
+  </div>
+</div>
+
+<!-- PODRUČJA RADA -->
+<div class="photo-section">
+  <div class="text-col">
+    <div class="sec-tag reveal">PODRUČJA RADA</div>
+    <div class="sec-title reveal reveal-d1">Tijelo.<br><em>Glas.</em><br>Poruka.</div>
+    <p class="sec-body reveal reveal-d2">Cilj nije naučiti ljude da glume, nego da jasnije koriste glas, tijelo, pažnju i strukturu poruke — tako da u važnim situacijama djeluju prisutno, sabrano i uvjerljivo.</p>
+    <div class="areas reveal reveal-d3">
+      <div class="area"><div class="area-name">GLAS</div><div class="area-text">Jasnoća, artikulacija, tempo, dah, boja i volumen.</div></div>
+      <div class="area"><div class="area-name">PRISUTNOST</div><div class="area-text">Fokus, trema, tijelo, kontakt s publikom.</div></div>
+      <div class="area"><div class="area-name">IZVEDBA</div><div class="area-text">Ritam, pauza, naglasak, energija.</div></div>
+      <div class="area"><div class="area-name">POD PRITISKOM</div><div class="area-text">Pitch, panel, intervju, medijski nastup.</div></div>
+    </div>
+  </div>
+  <div class="photo-col" id="photoCol1">
+    <img src="assets/IMG_8897.jpg" alt="Marinko Leš predavanje"/>
+  </div>
+</div>
+
+<!-- GLAS SEKCIJA -->
+<div class="photo-section reverse">
+  <div class="text-col">
+    <div class="sec-tag reveal">GLAS</div>
+    <div class="sec-title reveal reveal-d1">Studio.<br><em>Scena.</em><br>Ekran.</div>
+    <p class="sec-body reveal reveal-d2">Profesionalni voice-over, naracija, reklame, dokumentarni i korporativni formati. Iskustvo nacionalne televizije i kazališne scene spajaju tehničku preciznost, interpretaciju i osjećaj za ritam govora.</p>
+  </div>
+  <div class="photo-col" id="photoCol2">
+    <img src="assets/IMG_8896.jpg" alt="Marinko Leš studio"/>
+  </div>
+</div>
+
+<!-- FORMATI RADA -->
+<div class="formats-section">
+  <div class="sec-tag reveal">FORMATI RADA</div>
+  <div class="format reveal reveal-d1">
+    <span class="format-num">01</span>
+    <span class="format-name">RADIONICE</span>
+    <span class="format-desc">Za timove i organizacije. Poludnevne, cjelodnevne ili višesusretne, ovisno o cilju i broju sudionika.</span>
+  </div>
+  <div class="format reveal reveal-d2">
+    <span class="format-num">02</span>
+    <span class="format-name">INTENZIVI</span>
+    <span class="format-desc">Fokusirani formati za manje grupe: prezentacije, kamera, javni nastup, leadership komunikacija.</span>
+  </div>
+  <div class="format reveal reveal-d3">
+    <span class="format-num">03</span>
+    <span class="format-name">INDIVIDUALNI RAD</span>
+    <span class="format-desc">Jedan-na-jedan priprema za konkretan nastup, prezentaciju, snimanje, panel ili medijski nastup.</span>
+  </div>
+  <div class="format reveal reveal-d4">
+    <span class="format-num">04</span>
+    <span class="format-name">PREDAVANJA</span>
+    <span class="format-desc">Kompaktni edukativni formati za konferencije, interne akademije, HR programe i leadership događaje.</span>
+  </div>
+</div>
+
+<!-- KONTAKT -->
+<section class="contact" id="kontakt">
+  <div class="contact-pre reveal">KONTAKT</div>
+  <div class="contact-title reveal reveal-d1">Počnimo</div>
+  <div class="contact-title reveal reveal-d2"><em>razgovor.</em></div>
+  <p class="contact-sub reveal reveal-d3">Pošalji upit s kratkim opisom potreba,<br>brojem sudionika i željenim formatom.</p>
+  <button class="contact-btn reveal reveal-d4" onclick="window.location.href='mailto:marinko@marinkoles.com'">POŠALJI UPIT →</button>
+</section>
+
+<footer class="edu-footer">
+  <span class="edu-footer-left">MARINKO LEŠ · EDUKACIJA · 2026</span>
+  <div class="edu-footer-right"><a href="index.html">← NAZAD NA STRANICU</a></div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Photo reveal on scroll
+  const photoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.photo-col').forEach(el => photoObserver.observe(el));
+
+  // Parallax hero
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const heroHeight = document.querySelector('.hero').offsetHeight;
+    if (scrollY < heroHeight) {
+      const parallax = scrollY * 0.3;
+      heroBg.style.transform = `scale(1.05) translateY(${parallax}px)`;
+    }
+  }, { passive: true });
+
+  // Trigger reveal za elementi koji su odmah vidljivi
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      }
+    });
+  }, 100);
+</script>
+</body>
+</html>
