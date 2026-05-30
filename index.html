@@ -274,6 +274,110 @@
   .preview-card[data-section="znanost"] { --card-accent: var(--accent-science); }
   .preview-card[data-section="nastajanje"] { --card-accent: var(--accent-becoming); }
 
+  .preview-card-edu {
+    background: #FF4500;
+    border: none;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    padding: 32px 28px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 240px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: outline-color 0.3s, transform 0.2s;
+    grid-column: 1 / -1;
+    margin-top: 8px;
+  }
+
+  .preview-card-edu::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .preview-card-edu::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: #FFFFFF;
+    transition: width 0.4s ease;
+  }
+
+  .preview-card-edu:hover {
+    outline-color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+
+  .preview-card-edu:hover::before { opacity: 1; }
+  .preview-card-edu:hover::after { width: 100%; }
+
+  .preview-card-edu .card-num {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+  }
+
+  .preview-card-edu h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .preview-card-edu h3 em {
+    font-style: italic;
+    color: #FFFFFF;
+  }
+
+  .preview-card-edu .card-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+
+  .preview-card-edu p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .preview-card-edu .enter {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #FFFFFF;
+    margin-top: 20px;
+    transition: letter-spacing 0.2s;
+  }
+
+  .preview-card-edu:hover .enter { letter-spacing: 0.22em; }
+
+  .edu-tag-pill {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #FFFFFF;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 4px 12px;
+  }
+
   .preview-card .card-num {
     font-size: 10px;
     letter-spacing: 0.4em;
@@ -1965,6 +2069,19 @@
         </div>
       </button>
     </div>
+
+    <a href="edukacija.html" class="preview-card-edu">
+      <div class="edu-tag-pill">NOVO</div>
+      <div>
+        <div class="card-num">05 / EDUKACIJA</div>
+        <h3>Glas <em>prije</em><br>svega.</h3>
+        <div class="card-subtitle">RADIONICE · INTENZIVI · INDIVIDUALNI RAD</div>
+      </div>
+      <div>
+        <p>Radionice, intenzivi i individualni rad za profesionalce koji žele govoriti jasnije, sigurnije i uvjerljivije — u dvoranama, boardroomima i pred kamerama.</p>
+        <div class="enter">SAZNAJ VIŠE →</div>
+      </div>
+    </a>
 
     <div class="preview-bottom">
       <div class="contact-pill">PIŠITE NA <a href="mailto:marinkoles@gmail.com">marinkoles@gmail.com</a></div>
