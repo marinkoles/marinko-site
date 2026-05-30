@@ -617,14 +617,15 @@
     .full-section-inner { grid-template-columns: 1fr; gap: 2rem; }
     .sec-title { font-size: clamp(40px, 12vw, 56px); }
 
-    .areas { grid-template-columns: 1fr; }
-    .area { border-right: none; }
+    .areas { grid-template-columns: 1fr; border-left: none; }
+    .area { border-right: none; padding-left: 0; padding-right: 0; }
     .area:nth-child(even) { padding-left: 0; border-left: none; }
 
     .format { grid-template-columns: 50px 1fr 40px; gap: 0; padding: 1.5rem; }
-    .format-desc { display: none; }
+    .format-desc { display: block; grid-column: 2 / 3; padding-left: 1rem; padding-top: 0.5rem; font-size: 12px; color: #AAA; }
     .format-num { font-size: 48px; }
     .format-name { font-size: 20px; padding-left: 1rem; }
+    .format-arrow { grid-row: 1; }
 
     .photo-transition { height: 400px; }
 
