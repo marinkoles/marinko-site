@@ -414,6 +414,29 @@
   #view-glas .section-tag::before { background: var(--accent-voice); }
   #view-glas h2 em { color: var(--accent-voice); }
 
+  #view-glas .glas-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: url('assets/sekcija_glas_pozadina.JPG') center 40% / cover no-repeat;
+    z-index: 1;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  #view-glas .glas-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(10,10,10,0.15) 0%,
+      rgba(10,10,10,0.5) 50%,
+      rgba(10,10,10,0.9) 85%,
+      rgba(10,10,10,1) 100%);
+  }
+
   #view-znanost .section-tag { color: var(--accent-science); }
   #view-znanost .section-tag::before { background: var(--accent-science); }
   #view-znanost h2 em { color: var(--accent-science); }
@@ -431,6 +454,28 @@
   }
 
   /* ===================== KAZALISTE ===================== */
+
+  #view-preview .preview-hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('assets/poc_etna_stranica_pozadina.jpg') center 30% / cover no-repeat;
+    z-index: 0;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  #view-preview .preview-hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(10,10,10,0.2) 0%,
+      rgba(10,10,10,0.5) 60%,
+      rgba(10,10,10,0.95) 100%);
+  }
 
   /* Theatre interior as fixed background, dimmed */
   #view-kazaliste .theatre-bg {
@@ -1860,6 +1905,7 @@
 
 <!-- ===================== PREVIEW VIEW ===================== -->
 <div class="view active" id="view-preview">
+  <div class="preview-hero-bg"></div>
   <div class="preview-screen">
     <div class="hero-meta-right">SYS.V4 / 2026</div>
 
@@ -2295,6 +2341,7 @@
 
 <!-- ===================== GLAS ===================== -->
 <div class="view section-view" id="view-glas">
+  <div class="glas-bg"></div>
   <div class="section-header">
     <div class="section-tag">— 02 / GLAS</div>
     <h2>Glas <em>prije</em><br>nego što ga<br>vidimo.</h2>
