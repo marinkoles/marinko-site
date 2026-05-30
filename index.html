@@ -1,0 +1,2964 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="rNjz4GLDEjKNOZvUTZnx-i3ga7zemb8bPPbnn0QknDw" />
+<meta name="google-site-verification" content="2sqMBpsUwiMS3d_tiK5-Zz2hLg227pvsqjim4Hc24uU" />
+<title>Marinko Leš</title>
+<meta name="description" content="Marinko Leš — glumac, ansambl HNK Varaždin. Voice, naracija, znanstveni rad na spoju glume i neuroznanosti.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #f4f1eb;
+    --fg-muted: #888;
+    --fg-dim: #555;
+    --accent: #ff3d00;
+    --accent-stage: #ff3d00;
+    --accent-voice: #ffb700;
+    --accent-science: #00d4ff;
+    --accent-becoming: #c4a8e8;
+    --grid: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 1000;
+    mix-blend-mode: overlay;
+  }
+
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 80px 80px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  nav.main-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+  }
+
+  nav.main-nav .nav-logo {
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    padding: 0;
+  }
+
+  nav.main-nav .nav-status {
+    color: var(--fg-muted);
+  }
+
+  .back-btn {
+    position: fixed;
+    top: 24px;
+    left: 48px;
+    z-index: 110;
+    background: rgba(10,10,10,0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-strong);
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: none;
+  }
+
+  .back-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .back-btn.visible { display: block; }
+
+  .view {
+    display: none;
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    animation: viewIn 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .view.active { display: block; }
+
+  @keyframes viewIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===================== PREVIEW VIEW ===================== */
+
+  .preview-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 48px 60px;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-meta {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: left center;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    white-space: nowrap;
+  }
+
+  .hero-meta-right {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: right center;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    white-space: nowrap;
+  }
+
+  .name-block { margin-bottom: 56px; }
+
+  .name-block h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(64px, 11vw, 180px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    animation: heroIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .name-block h1 .accent {
+    font-style: italic;
+    font-weight: 900;
+    color: var(--accent);
+  }
+
+  .name-tagline {
+    margin-top: 20px;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    animation: heroIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    opacity: 0;
+    transform: translateY(40px);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .name-tagline::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--fg-muted);
+  }
+
+  @keyframes heroIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .preview-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    animation: heroIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .preview-card {
+    position: relative;
+    padding: 32px 24px 28px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(8px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    overflow: hidden;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .preview-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--card-accent) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+  }
+
+  .preview-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--card-accent);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .preview-card:hover {
+    border-color: var(--card-accent);
+    transform: translateY(-6px);
+  }
+
+  .preview-card:hover::before { opacity: 0.12; }
+  .preview-card:hover::after { width: 100%; }
+
+  .preview-card[data-section="kazaliste"] { --card-accent: var(--accent-stage); }
+  .preview-card[data-section="glas"] { --card-accent: var(--accent-voice); }
+  .preview-card[data-section="znanost"] { --card-accent: var(--accent-science); }
+  .preview-card[data-section="nastajanje"] { --card-accent: var(--accent-becoming); }
+
+  .preview-card .card-num {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--fg-muted);
+    transition: color 0.5s;
+  }
+
+  .preview-card:hover .card-num { color: var(--card-accent); }
+
+  .preview-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 3.5vw, 44px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin: 16px 0 12px;
+  }
+
+  .preview-card h3 em {
+    font-weight: 900;
+    font-style: italic;
+    color: var(--card-accent);
+  }
+
+  .preview-card .card-subtitle {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+  }
+
+  .preview-card p {
+    color: var(--fg-muted);
+    font-size: 11.5px;
+    line-height: 1.6;
+  }
+
+  .preview-card .enter {
+    margin-top: 20px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--fg);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: gap 0.4s, color 0.4s;
+  }
+
+  .preview-card:hover .enter {
+    gap: 22px;
+    color: var(--card-accent);
+  }
+
+  .preview-bottom {
+    margin-top: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .preview-bottom .contact-pill { color: var(--fg); }
+  .preview-bottom .contact-pill a {
+    color: var(--accent);
+    text-decoration: none;
+    font-style: italic;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .preview-bottom .contact-pill a:hover { border-color: var(--accent); }
+
+  /* ===================== SECTION VIEWS ===================== */
+
+  .section-view {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  .section-view .section-header {
+    padding: 0 48px;
+    max-width: 1600px;
+    margin: 0 auto 80px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .section-view .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .section-view .section-tag::before {
+    content: "";
+    width: 60px;
+    height: 1px;
+  }
+
+  .section-view h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(60px, 10vw, 180px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+  }
+
+  .section-view h2 em {
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  .section-view .section-lede {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.5;
+    margin-top: 48px;
+    max-width: 760px;
+    color: var(--fg-muted);
+  }
+
+  #view-kazaliste .section-tag { color: var(--accent-stage); }
+  #view-kazaliste .section-tag::before { background: var(--accent-stage); }
+  #view-kazaliste h2 em { color: var(--accent-stage); }
+
+  #view-glas .section-tag { color: var(--accent-voice); }
+  #view-glas .section-tag::before { background: var(--accent-voice); }
+  #view-glas h2 em { color: var(--accent-voice); }
+
+  #view-znanost .section-tag { color: var(--accent-science); }
+  #view-znanost .section-tag::before { background: var(--accent-science); }
+  #view-znanost h2 em { color: var(--accent-science); }
+
+  #view-nastajanje .section-tag { color: var(--accent-becoming); }
+  #view-nastajanje .section-tag::before { background: var(--accent-becoming); }
+  #view-nastajanje h2 em { color: var(--accent-becoming); }
+
+  .section-content {
+    padding: 0 48px;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ===================== KAZALISTE ===================== */
+
+  /* Theatre interior as fixed background, dimmed */
+  #view-kazaliste .theatre-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: url('assets/hnk-varazdin-bg.jpg') center 30% / cover no-repeat;
+    z-index: 1;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  #view-kazaliste .theatre-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(10,10,10,0.15) 0%,
+      rgba(10,10,10,0.5) 50%,
+      rgba(10,10,10,0.9) 85%,
+      rgba(10,10,10,1) 100%);
+  }
+
+  /* Photo strip - horizontal scroll of production photos */
+  .photo-strip-wrap {
+    margin: 80px 0 100px;
+    position: relative;
+  }
+
+  .photo-strip-label {
+    padding: 0 48px;
+    max-width: 1600px;
+    margin: 0 auto 24px;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .photo-strip-label::before {
+    content: "";
+    flex: 0 0 60px;
+    height: 1px;
+    background: var(--accent-stage);
+  }
+
+  .photo-strip-label .hint {
+    margin-left: auto;
+    color: var(--fg-dim);
+    font-size: 9px;
+  }
+
+  .photo-strip {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 48px 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-stage) transparent;
+  }
+
+  .photo-strip::-webkit-scrollbar { height: 4px; }
+  .photo-strip::-webkit-scrollbar-track { background: var(--border); }
+  .photo-strip::-webkit-scrollbar-thumb { background: var(--accent-stage); }
+
+  .photo-tile {
+    flex: 0 0 auto;
+    width: 280px;
+    height: 360px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s;
+    background: #0a0a0a;
+    box-shadow:
+      0 12px 28px rgba(0,0,0,0.55),
+      0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  .photo-tile:hover {
+    box-shadow:
+      0 20px 40px rgba(0,0,0,0.7),
+      0 0 0 1px var(--accent-stage);
+  }
+
+  .photo-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.95) contrast(1.05);
+    transition: filter 0.6s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .photo-tile:hover { width: 480px; }
+  .photo-tile:hover img {
+    filter: brightness(1.05) contrast(1.1);
+    transform: scale(1.04);
+  }
+
+  .photo-tile .photo-meta {
+    position: absolute;
+    inset: 0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, transparent 80%);
+    color: var(--fg);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .photo-tile:hover .photo-meta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .photo-tile .photo-role {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent-stage);
+    margin-bottom: 8px;
+  }
+
+  .photo-tile .photo-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .photo-tile .photo-dir {
+    font-size: 10px;
+    color: var(--fg-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* Work list */
+  .work-list-section {
+    margin-top: 40px;
+  }
+
+  .work-list-section h4 {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .work-list-section h4::before {
+    content: "";
+    width: 60px;
+    height: 1px;
+    background: var(--accent-stage);
+  }
+
+  .work-row {
+    display: grid;
+    grid-template-columns: 70px 1fr auto auto;
+    gap: 32px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+    transition: all 0.4s;
+  }
+
+  .work-row:hover { padding-left: 16px; }
+  #view-kazaliste .work-row:hover { border-bottom-color: var(--accent-stage); }
+  #view-kazaliste .work-row:hover .title em { color: var(--accent-stage); }
+
+  .work-row .year {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--fg-muted);
+  }
+
+  .work-row .title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(20px, 2.2vw, 28px);
+    letter-spacing: -0.02em;
+  }
+
+  .work-row .title em {
+    font-style: italic;
+    transition: color 0.3s;
+  }
+
+  .work-row .role {
+    font-size: 12px;
+    color: var(--fg-muted);
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+
+  .work-row .venue {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    text-align: right;
+    max-width: 240px;
+  }
+
+  .work-row.upcoming { background: rgba(255,61,0,0.04); padding-left: 16px; padding-right: 16px; }
+  .work-row.upcoming .title em { color: var(--accent-stage); }
+  .work-row.upcoming .role { color: var(--accent-stage); }
+
+  .work-section-divider {
+    margin: 80px 0 32px;
+  }
+
+  .collab-panel {
+    margin-top: 120px;
+    padding: 64px 0;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+
+  .collab-panel h4 {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .collab-panel .collab-list {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--fg-muted);
+  }
+
+  .collab-panel .collab-list em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  /* ===================== GLAS ===================== */
+
+  .reels-intro {
+    margin-top: 80px;
+    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+
+  .reels-intro .block h4 {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent-voice);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .reels-intro .block h4::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--accent-voice);
+  }
+
+  .reels-intro .block p {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--fg-muted);
+  }
+
+  .reels-intro .block p em {
+    color: var(--fg);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .reels-grid-label {
+    margin-top: 80px;
+    margin-bottom: 24px;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .reels-grid-label::before {
+    content: "";
+    width: 60px;
+    height: 1px;
+    background: var(--accent-voice);
+  }
+
+  .reels-grid-label .hint {
+    margin-left: auto;
+    color: var(--fg-dim);
+    font-size: 9px;
+    text-transform: uppercase;
+  }
+
+  .reels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .reel-tile {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: #000;
+    transition: border-color 0.4s;
+  }
+
+  .reel-tile.short { aspect-ratio: 9 / 16; }
+
+  .reel-tile:hover { border-color: var(--accent-voice); }
+
+  .reel-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s, filter 0.4s;
+    filter: grayscale(0.4) brightness(0.7);
+  }
+
+  .reel-tile:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0) brightness(0.9);
+  }
+
+  .reel-tile .reel-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    transition: background 0.4s;
+  }
+
+  .reel-tile:hover .reel-overlay {
+    background: radial-gradient(circle at center, rgba(255,183,0,0.15) 0%, rgba(0,0,0,0.4) 100%);
+  }
+
+  .reel-tile .play-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,10,10,0.5);
+    backdrop-filter: blur(6px);
+    transition: all 0.4s;
+  }
+
+  .reel-tile:hover .play-icon {
+    border-color: var(--accent-voice);
+    background: rgba(255,183,0,0.1);
+    transform: scale(1.1);
+  }
+
+  .reel-tile .play-icon::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 12px solid var(--fg);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 4px;
+    transition: border-left-color 0.4s;
+  }
+
+  .reel-tile:hover .play-icon::after { border-left-color: var(--accent-voice); }
+
+  .reel-tile .reel-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border-strong);
+    color: var(--accent-voice);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* TV/Film list */
+  .screen-credits {
+    margin-top: 120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+
+  .credit-block h4 {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent-voice);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .credit-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .credit-row:last-child { border-bottom: none; }
+  .credit-row .credit-year {
+    color: var(--fg-dim);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+  }
+  .credit-row .credit-meta { color: var(--fg-muted); }
+  .credit-row .credit-meta strong {
+    color: var(--fg);
+    font-weight: 400;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+  }
+  .credit-row .credit-role {
+    color: var(--fg-dim);
+    font-size: 10px;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===================== ZNANOST ===================== */
+
+  .book-layout {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .book-cover {
+    position: relative;
+    aspect-ratio: 900 / 1290;
+    overflow: hidden;
+    box-shadow:
+      0 30px 60px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(0,212,255,0.1);
+    transform: rotate(-1deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .book-cover:hover { transform: rotate(0deg) translateY(-6px); }
+
+  .book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .book-meta {
+    padding-top: 16px;
+  }
+
+  .book-meta .book-tag {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent-science);
+    margin-bottom: 16px;
+  }
+
+  .book-meta h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .book-meta h3 em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .book-meta .book-pub {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--fg-dim);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .book-meta p {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+    margin-bottom: 20px;
+  }
+
+  .book-meta p em {
+    font-style: italic;
+    color: var(--fg);
+  }
+
+  .book-meta blockquote {
+    margin-top: 32px;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-science);
+    background: rgba(0,212,255,0.03);
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--fg-muted);
+  }
+
+  .book-meta blockquote cite {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+
+  /* Buy link */
+  .book-buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 14px 24px;
+    border: 1px solid var(--accent-science);
+    color: var(--accent-science);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .book-buy:hover {
+    background: var(--accent-science);
+    color: var(--bg);
+  }
+
+  .book-buy .arrow {
+    transition: transform 0.3s;
+  }
+
+  .book-buy:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Secondary book - alongside the main book */
+  .book-secondary {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: start;
+    max-width: 900px;
+    padding-top: 60px;
+    border-top: 1px solid var(--border);
+  }
+
+  .book-secondary-label {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 32px;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .book-secondary-label::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--accent-science);
+  }
+
+  .book-secondary .book-cover-small {
+    position: relative;
+    aspect-ratio: 730 / 1024;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(0,212,255,0.08);
+    transform: rotate(1deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .book-secondary .book-cover-small:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
+
+  .book-secondary .book-cover-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .book-secondary-meta .meta {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent-science);
+    margin-bottom: 14px;
+  }
+
+  .book-secondary-meta h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .book-secondary-meta h4 em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .book-secondary-meta .author {
+    font-size: 12px;
+    color: var(--fg-muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .book-secondary-meta .author strong {
+    color: var(--fg);
+    font-weight: 500;
+  }
+
+  .book-secondary-meta .pub {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-bottom: 20px;
+  }
+
+  .book-secondary-meta p {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+  }
+
+  .book-secondary-meta .out-of-print {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 14px;
+    border: 1px dashed var(--border-strong);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+
+  /* Znanost background — Emocija i osjećaja cover, dimmed */
+  #view-znanost .znanost-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: url('assets/emocija-osjecaja.jpg') center 25% / cover no-repeat;
+    z-index: 1;
+    opacity: 0.18;
+    pointer-events: none;
+    filter: blur(2px);
+  }
+
+  #view-znanost .znanost-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(10,10,10,0.4) 0%,
+      rgba(10,10,10,0.7) 50%,
+      rgba(10,10,10,0.95) 85%,
+      rgba(10,10,10,1) 100%);
+  }
+
+  .research-grid {
+    margin-top: 120px;
+  }
+
+  .research-grid > h4 {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .research-grid > h4::before {
+    content: "";
+    width: 60px;
+    height: 1px;
+    background: var(--accent-science);
+  }
+
+  .science-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .science-card {
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    transition: all 0.4s;
+  }
+
+  .science-card:hover {
+    border-color: var(--accent-science);
+    background: rgba(0, 212, 255, 0.03);
+  }
+
+  .science-card .meta {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent-science);
+    margin-bottom: 16px;
+  }
+
+  .science-card h5 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .science-card h5 em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .science-card p {
+    color: var(--fg-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ===================== NASTAJANJE ===================== */
+
+  #view-nastajanje .section-content { text-align: center; }
+  #view-nastajanje .section-header { text-align: center; }
+  #view-nastajanje .section-header .section-tag {
+    justify-content: center;
+  }
+  #view-nastajanje .section-lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .becoming-note {
+    margin-top: 80px;
+    padding: 80px 48px;
+    border: 1px solid rgba(196, 168, 232, 0.2);
+    text-align: left;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    background:
+      linear-gradient(135deg, rgba(196,168,232,0.03) 0%, transparent 60%);
+  }
+
+  .becoming-note .meta {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent-becoming);
+    margin-bottom: 32px;
+  }
+
+  .becoming-note p {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--fg-muted);
+    margin-bottom: 24px;
+  }
+
+  .becoming-note p:last-child { margin-bottom: 0; }
+
+  .becoming-note p em {
+    color: var(--fg);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .becoming-soon {
+    margin-top: 80px;
+    padding: 48px;
+    border: 1px dashed rgba(196, 168, 232, 0.25);
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent-becoming);
+  }
+
+  /* ===================== VIDEO MODAL ===================== */
+
+  .video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    animation: modalIn 0.3s ease-out;
+  }
+
+  .video-modal.active { display: flex; }
+
+  @keyframes modalIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .video-modal .modal-inner {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  .video-modal .modal-inner.short {
+    max-width: 380px;
+  }
+
+  .video-modal iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    background: #000;
+  }
+
+  .video-modal .modal-inner.short iframe {
+    aspect-ratio: 9 / 16;
+  }
+
+  .video-modal .modal-close {
+    position: absolute;
+    top: -48px;
+    right: 0;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .video-modal .modal-close:hover {
+    border-color: var(--accent-voice);
+    color: var(--accent-voice);
+  }
+
+  /* ===================== RESPONSIVE ===================== */
+
+  @media (max-width: 1200px) {
+    .book-layout { grid-template-columns: 280px 1fr; gap: 48px; }
+  }
+
+  @media (max-width: 1100px) {
+    .preview-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+    .reels-intro { grid-template-columns: 1fr; gap: 48px; }
+    .screen-credits { grid-template-columns: 1fr; gap: 48px; }
+    .book-layout { grid-template-columns: 1fr; gap: 32px; }
+    .book-cover { max-width: 280px; transform: rotate(0); }
+    .book-secondary { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; margin-top: 60px; }
+    .book-secondary .book-cover-small { max-width: 200px; transform: rotate(0); }
+    .collab-panel { grid-template-columns: 1fr; gap: 32px; }
+    .work-row { grid-template-columns: 60px 1fr; gap: 16px; }
+    .work-row .role, .work-row .venue {
+      grid-column: 2;
+      text-align: left;
+      margin-top: 4px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    nav.main-nav { padding: 16px 20px; font-size: 9px; }
+    nav.main-nav .nav-status { display: none; }
+    .back-btn { left: 20px; top: 16px; padding: 10px 14px; font-size: 9px; }
+    .preview-screen { padding: 90px 20px 40px; }
+    .preview-cards { grid-template-columns: 1fr; gap: 12px; }
+    .preview-card { min-height: 200px; padding: 28px 24px; }
+    .hero-meta, .hero-meta-right { display: none; }
+    .section-view { padding-top: 100px; }
+    .section-view .section-header, .section-content {
+      padding-left: 20px; padding-right: 20px;
+    }
+    .photo-strip { padding-left: 20px; padding-right: 20px; }
+    .photo-strip-label { padding-left: 20px; padding-right: 20px; flex-wrap: wrap; }
+    .photo-strip-label .hint { display: none; }
+    .reels-grid-label .hint { display: none; }
+    .photo-tile { width: 220px; height: 280px; }
+    .photo-tile:hover { width: 220px; }
+    .photo-tile .photo-meta { opacity: 1; transform: translateY(0); }
+    .becoming-note { padding: 40px 24px; }
+    .preview-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    .video-modal { padding: 20px; }
+    .video-modal .modal-close { top: -40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ===================== PHOTO LIGHTBOX ===================== */
+
+  .photo-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+    z-index: 1500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 48px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .photo-modal.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .photo-modal-inner {
+    position: relative;
+    max-width: 1400px;
+    max-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .photo-modal img {
+    max-width: 100%;
+    max-height: calc(100vh - 220px);
+    object-fit: contain;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+  }
+
+  .photo-modal-meta {
+    text-align: center;
+    color: var(--fg);
+    max-width: 600px;
+  }
+
+  .photo-modal-role {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent-stage);
+    margin-bottom: 12px;
+  }
+
+  .photo-modal-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .photo-modal-dir {
+    font-size: 12px;
+    color: var(--fg-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .photo-modal-credit {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .photo-modal-credit span {
+    color: var(--fg-muted);
+  }
+
+  .photo-modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: 1px solid var(--border-strong);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .photo-modal-close:hover {
+    border-color: var(--accent-stage);
+    color: var(--accent-stage);
+  }
+
+  .photo-modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid var(--border-strong);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 18px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-modal-nav:hover {
+    border-color: var(--accent-stage);
+    color: var(--accent-stage);
+  }
+
+  .photo-modal-nav.prev { left: -64px; }
+  .photo-modal-nav.next { right: -64px; }
+
+  @media (max-width: 900px) {
+    .photo-modal { padding: 40px 16px; }
+    .photo-modal-close { top: -36px; }
+    .photo-modal-nav.prev { left: 8px; }
+    .photo-modal-nav.next { right: 8px; }
+    .photo-modal img { max-height: calc(100vh - 260px); }
+    .photo-modal-title { font-size: 22px; }
+  }
+
+  /* ===================== ESSAYS (NASTAJANJE) ===================== */
+
+  .essay-list {
+    max-width: 820px;
+    margin: 60px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .essay-list-label {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .essay-item {
+    display: block;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+  }
+
+  .essay-item:hover {
+    padding-left: 16px;
+  }
+
+  .essay-item-meta {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent-becoming);
+    margin-bottom: 12px;
+  }
+
+  .essay-item-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--fg);
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+
+  .essay-item:hover .essay-item-title {
+    font-style: italic;
+  }
+
+  .essay-item-subtitle {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--fg-muted);
+    line-height: 1.4;
+  }
+
+  /* Essay view (individual essay page) */
+  .essay-view {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  .essay-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .essay-tag {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent-becoming);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .essay-tag::before {
+    content: "";
+    width: 60px;
+    height: 1px;
+    background: var(--accent-becoming);
+  }
+
+  .essay-view h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+
+  .essay-subtitle {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--fg-muted);
+    margin-bottom: 60px;
+    line-height: 1.4;
+  }
+
+  .essay-date {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-bottom: 60px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .essay-body {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--fg);
+    letter-spacing: -0.005em;
+  }
+
+  .essay-body h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.2;
+    color: var(--fg);
+    margin: 60px 0 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .essay-body h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent-becoming);
+    margin: 40px 0 16px;
+  }
+
+  .essay-body p {
+    margin-bottom: 24px;
+  }
+
+  .essay-body em {
+    font-style: italic;
+  }
+
+  .essay-body strong {
+    font-weight: 600;
+  }
+
+  .essay-body blockquote {
+    margin: 32px 0;
+    padding: 24px 32px;
+    border-left: 2px solid var(--accent-becoming);
+    background: rgba(196, 168, 232, 0.04);
+    font-size: 16px;
+    color: var(--fg-muted);
+    font-style: normal;
+  }
+
+  .essay-body blockquote p { margin-bottom: 12px; }
+  .essay-body blockquote p:last-child { margin-bottom: 0; }
+
+  .essay-body hr {
+    border: none;
+    text-align: center;
+    margin: 48px 0;
+    color: var(--fg-dim);
+    font-size: 12px;
+    letter-spacing: 0.5em;
+  }
+
+  .essay-body hr::after {
+    content: "✦";
+    color: var(--accent-becoming);
+  }
+
+  .essay-body a {
+    color: var(--accent-becoming);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196, 168, 232, 0.3);
+    transition: border-color 0.3s;
+  }
+
+  .essay-body a:hover {
+    border-color: var(--accent-becoming);
+  }
+
+  /* Screenplay block (for "Prihvatljivo ludilo") */
+  .essay-body .screenplay {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 32px 0;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    color: var(--fg-muted);
+  }
+
+  .essay-body .screenplay p { margin-bottom: 8px; }
+
+  .essay-body .scene-heading {
+    color: var(--fg);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px !important;
+  }
+
+  .essay-body .character {
+    color: var(--accent-becoming);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    margin-top: 16px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .essay-body .parenthetical {
+    color: var(--fg-dim);
+    padding-left: 20px;
+    font-size: 12px;
+  }
+
+  .essay-body .cut {
+    color: var(--accent-becoming);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    margin-top: 16px !important;
+    text-align: right;
+  }
+
+  /* Literature/references */
+  .essay-body .references {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .essay-body .references p {
+    margin-bottom: 14px;
+    color: var(--fg-muted);
+    padding-left: 20px;
+    text-indent: -20px;
+  }
+
+  @media (max-width: 768px) {
+    .essay-container { padding: 0 24px; }
+    .essay-body { font-size: 16px; }
+    .essay-body .screenplay { padding: 20px; font-size: 12px; }
+    .essay-item { padding: 22px 0; }
+    .essay-item-title { font-size: 22px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav class="main-nav">
+  <button class="nav-logo" onclick="showView('preview')">M.L. / EST. 1977</button>
+  <div class="nav-status">ZAGREB / SYS.V4</div>
+</nav>
+
+<button class="back-btn" onclick="showView('preview')">← NATRAG</button>
+
+<!-- ===================== PREVIEW VIEW ===================== -->
+<div class="view active" id="view-preview">
+  <div class="preview-screen">
+    <div class="hero-meta-right">SYS.V4 / 2026</div>
+
+    <div class="name-block">
+      <h1>Marinko<br><span class="accent">Leš</span></h1>
+      <div class="name-tagline">KAZALIŠTE · GLAS · ISTRAŽIVANJE · PROCES</div>
+    </div>
+
+    <div class="preview-cards">
+      <button class="preview-card" data-section="kazaliste" onclick="showView('kazaliste')">
+        <div>
+          <div class="card-num">01 / KAZALIŠTE</div>
+          <h3>Kazali<em>šte</em></h3>
+          <div class="card-subtitle">ANSAMBL · HNK VARAŽDIN</div>
+        </div>
+        <div>
+          <p>Glumački rad u ansamblu HNK u Varaždinu. Uloge, predstave i suradnje.</p>
+          <div class="enter">UĐI →</div>
+        </div>
+      </button>
+
+      <button class="preview-card" data-section="glas" onclick="showView('glas')">
+        <div>
+          <div class="card-num">02 / GLAS</div>
+          <h3><em>Glas</em></h3>
+          <div class="card-subtitle">VOICE · TV · NARACIJA</div>
+        </div>
+        <div>
+          <p>Voice-over, naracija, reklame, dokumentarni i televizijski formati.</p>
+          <div class="enter">UĐI →</div>
+        </div>
+      </button>
+
+      <button class="preview-card" data-section="znanost" onclick="showView('znanost')">
+        <div>
+          <div class="card-num">03 / ZNANOST</div>
+          <h3>Zna<em>nost</em></h3>
+          <div class="card-subtitle">NEUROZNANOST · GLUMA · IZVEDBA</div>
+        </div>
+        <div>
+          <p>Istraživački rad na spoju glume i neuroznanosti. Tekstovi o izvedbi, subjektivnosti iskustva, pažnji i emociji.</p>
+          <div class="enter">UĐI →</div>
+        </div>
+      </button>
+
+      <button class="preview-card" data-section="nastajanje" onclick="showView('nastajanje')">
+        <div>
+          <div class="card-num">04 / U NASTAJANJU</div>
+          <h3>U <em>nastajanju</em></h3>
+          <div class="card-subtitle">PSIHOTERAPIJA · BILJEŠKE</div>
+        </div>
+        <div>
+          <p>Bilješke i tekstovi nastali tijekom edukacije iz psihoterapije. Prostor učenja, čitanja i povezivanja.</p>
+          <div class="enter">UĐI →</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="preview-bottom">
+      <div class="contact-pill">PIŠITE NA <a href="mailto:marinkoles@gmail.com">marinkoles@gmail.com</a></div>
+      <div>© MMXXVI · HR / EN</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== KAZALISTE ===================== -->
+<div class="view section-view" id="view-kazaliste">
+  <div class="theatre-bg"></div>
+
+  <div class="section-header">
+    <div class="section-tag">— 01 / KAZALIŠTE</div>
+    <h2>Tijelo na<br><em>granici</em><br>mjerljivog.</h2>
+    <p class="section-lede">Marinko Leš član je ansambla HNK u Varaždinu. Njegov kazališni rad obuhvaća klasični i suvremeni repertoar — od Shakespearea i Brechta do Feydeaua i suvremene domaće drame.</p>
+  </div>
+
+  <!-- Photo strip -->
+  <div class="photo-strip-wrap">
+    <div class="photo-strip-label">
+      <span>FOTOGRAFIJE IZVEDBI</span>
+      <span class="hint">→ horizontalno scroll · klik za uvećanje</span>
+    </div>
+    <div class="photo-strip" id="photoStrip">
+      <div class="photo-tile">
+        <img src="assets/cyrano-1.jpg" alt="Cyrano de Bergerac">
+        <div class="photo-meta">
+          <div class="photo-role">CHRISTIAN</div>
+          <div class="photo-title">Cyrano de Bergerac</div>
+          <div class="photo-dir">Vito Taufer · HNK Varaždin · 2025.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/cyrano-2.jpg" alt="Cyrano de Bergerac">
+        <div class="photo-meta">
+          <div class="photo-role">CHRISTIAN</div>
+          <div class="photo-title">Cyrano de Bergerac</div>
+          <div class="photo-dir">Vito Taufer · HNK Varaždin · 2025.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/lear.jpg" alt="Kralj Lear">
+        <div class="photo-meta">
+          <div class="photo-role">GLOUCESTER</div>
+          <div class="photo-title">Kralj Lear</div>
+          <div class="photo-dir">Ivan Plazibat · HNK Varaždin · 2026.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/drvene-ptice-1.jpg" alt="Drvene ptice">
+        <div class="photo-meta">
+          <div class="photo-role">DOKTOR ŠPILER</div>
+          <div class="photo-title">Drvene ptice</div>
+          <div class="photo-dir">Ivan Plazibat · HNK Zagreb / HNK Varaždin · 2025.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/drvene-ptice-2.jpg" alt="Drvene ptice">
+        <div class="photo-meta">
+          <div class="photo-role">DOKTOR ŠPILER</div>
+          <div class="photo-title">Drvene ptice</div>
+          <div class="photo-dir">Ivan Plazibat · HNK Zagreb / HNK Varaždin · 2025.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/majka-hrabrost-1.jpg" alt="Majka Courage">
+        <div class="photo-meta">
+          <div class="photo-role">EILIF</div>
+          <div class="photo-title">Majka Courage i njezina djeca</div>
+          <div class="photo-dir">Krešimir Dolenčić · HNK Varaždin · 2023.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/majka-hrabrost-2.jpg" alt="Majka Courage">
+        <div class="photo-meta">
+          <div class="photo-role">EILIF</div>
+          <div class="photo-title">Majka Courage i njezina djeca</div>
+          <div class="photo-dir">Krešimir Dolenčić · HNK Varaždin · 2023.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/majka-hrabrost-3.jpg" alt="Majka Courage">
+        <div class="photo-meta">
+          <div class="photo-role">EILIF</div>
+          <div class="photo-title">Majka Courage i njezina djeca</div>
+          <div class="photo-dir">Krešimir Dolenčić · HNK Varaždin · 2023.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/krletka.jpg" alt="Krletka">
+        <div class="photo-meta">
+          <div class="photo-role">ALBIN</div>
+          <div class="photo-title">Krletka</div>
+          <div class="photo-dir">Krešimir Dolenčić · HNK Varaždin · 2024.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/balkanski.jpg" alt="Balkanski špijun">
+        <div class="photo-meta">
+          <div class="photo-role">ĐURA ČVOROVIĆ</div>
+          <div class="photo-title">Balkanski špijun</div>
+          <div class="photo-dir">Vanja Jovanović · HNK Varaždin · 2024.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/slucaj.jpg" alt="Slučaj vlastite pogibelji">
+        <div class="photo-meta">
+          <div class="photo-role">SARIN OTAC / POLICAJAC</div>
+          <div class="photo-title">Slučaj vlastite pogibelji</div>
+          <div class="photo-dir">Ivan Plazibat · HNK Varaždin · 2023.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/san.jpg" alt="San Ivanjske noći">
+        <div class="photo-meta">
+          <div class="photo-role">PETAR DUNJA</div>
+          <div class="photo-title">San Ivanjske noći</div>
+          <div class="photo-dir">Paolo Magelli · HNK Varaždin · 2023.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/grofica.jpg" alt="Grofica Marica">
+        <div class="photo-meta">
+          <div class="photo-role">WURZINGER</div>
+          <div class="photo-title">Grofica Marica</div>
+          <div class="photo-dir">Dejan Jakovljević · HNK Varaždin · 2023.</div>
+        </div>
+      </div>
+      <div class="photo-tile">
+        <img src="assets/art.jpg" alt="ART">
+        <div class="photo-meta">
+          <div class="photo-role">SERGE</div>
+          <div class="photo-title">ART</div>
+          <div class="photo-dir">Barbara Rocco · HNK Varaždin · 2023.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-content">
+
+    <!-- U pripremi -->
+    <div class="work-list-section">
+      <h4>U PRIPREMI</h4>
+      <div class="work-row upcoming">
+        <div class="year">2026</div>
+        <div class="title"><em>Richard III.</em></div>
+        <div class="role">HASTINGS</div>
+        <div class="venue">Vito Taufer · DLJI / HNK Zagreb / HNK Varaždin</div>
+      </div>
+    </div>
+
+    <!-- HNK Varazdin -->
+    <div class="work-list-section work-section-divider">
+      <h4>HNK VARAŽDIN · ANSAMBL</h4>
+
+      <div class="work-row">
+        <div class="year">2026</div>
+        <div class="title"><em>Kralj Lear</em> <span style="color:var(--fg-dim); font-size:0.7em;">— William Shakespeare</span></div>
+        <div class="role">GLOUCESTER</div>
+        <div class="venue">Ivan Plazibat</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2025</div>
+        <div class="title"><em>Cyrano</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Rostand / Taufer / Đikanović</span></div>
+        <div class="role">CHRISTIAN DE NEUVILLETTE</div>
+        <div class="venue">Vito Taufer</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2025</div>
+        <div class="title"><em>Drvene ptice</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Lidija Deduš</span></div>
+        <div class="role">DOKTOR ŠPILER</div>
+        <div class="venue">Ivan Plazibat · koprod. HNK Zagreb</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2024</div>
+        <div class="title"><em>Priča o Zorku Bistrozorkom i o Sreći</em></div>
+        <div class="role">VALIGORA</div>
+        <div class="venue">Lea Anastazija Fleger</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2024</div>
+        <div class="title"><em>Krletka</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Jean Poiret</span></div>
+        <div class="role">ALBIN</div>
+        <div class="venue">Krešimir Dolenčić</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2024</div>
+        <div class="title"><em>Balkanski špijun</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Dušan Kovačević</span></div>
+        <div class="role">ĐURA ČVOROVIĆ</div>
+        <div class="venue">Vanja Jovanović</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2023</div>
+        <div class="title"><em>Šapat duše</em></div>
+        <div class="role">USAMLJENI ČOVJEK / MANGUP</div>
+        <div class="venue">Tamara Kučinović</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2023</div>
+        <div class="title"><em>San Ivanjske noći</em> <span style="color:var(--fg-dim); font-size:0.7em;">— W. Shakespeare</span></div>
+        <div class="role">PETAR DUNJA</div>
+        <div class="venue">Paolo Magelli</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2023</div>
+        <div class="title"><em>Slučaj vlastite pogibelji</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Kristijan Novak</span></div>
+        <div class="role">SARIN OTAC / POLICAJAC / NOVINAR</div>
+        <div class="venue">Ivan Plazibat</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2023</div>
+        <div class="title"><em>Grofica Marica</em> <span style="color:var(--fg-dim); font-size:0.7em;">— E. Kálmán</span></div>
+        <div class="role">WURZINGER</div>
+        <div class="venue">Dejan Jakovljević</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2023</div>
+        <div class="title"><em>ART</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Yasmina Reza</span></div>
+        <div class="role">SERGE</div>
+        <div class="venue">Barbara Rocco</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2023</div>
+        <div class="title"><em>Majka Courage i njezina djeca</em> <span style="color:var(--fg-dim); font-size:0.7em;">— B. Brecht</span></div>
+        <div class="role">EILIF</div>
+        <div class="venue">Krešimir Dolenčić</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2022</div>
+        <div class="title"><em>Orašar</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Hoffmann / Kaštelan</span></div>
+        <div class="role">KRALJ</div>
+        <div class="venue">Paolo Tišljarić</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2022</div>
+        <div class="title"><em>Buba u uhu</em> <span style="color:var(--fg-dim); font-size:0.7em;">— G. Feydeau</span></div>
+        <div class="role">ROMAIN TOURNEL</div>
+        <div class="venue">Snežana Trišić</div>
+      </div>
+    </div>
+
+    <!-- Druga kazalista -->
+    <div class="work-list-section work-section-divider">
+      <h4>U DRUGIM KAZALIŠTIMA</h4>
+
+      <div class="work-row">
+        <div class="year">2024</div>
+        <div class="title"><em>Oluja</em> <span style="color:var(--fg-dim); font-size:0.7em;">— W. Shakespeare</span></div>
+        <div class="role">ANTONIO</div>
+        <div class="venue">Vito Taufer · Dubrovačke ljetne igre</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2021</div>
+        <div class="title"><em>Eduard Drugi</em> <span style="color:var(--fg-dim); font-size:0.7em;">— C. Marlowe</span></div>
+        <div class="role">SPENCER</div>
+        <div class="venue">Senka Bulić · Kazalište Hotel Bulić</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2017</div>
+        <div class="title"><em>Točno u podne</em></div>
+        <div class="role">KEGLJEN / PENOVIĆ / VUKOVIĆ</div>
+        <div class="venue">Vedran Hleb · Teatar &amp;td</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2011</div>
+        <div class="title"><em>Rozamunda</em> <span style="color:var(--fg-dim); font-size:0.7em;">— E. Jelinek</span></div>
+        <div class="role">FULVIO</div>
+        <div class="venue">Senka Bulić · Hotel Bulić / Teatar &amp;td / Zetski dom</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2011</div>
+        <div class="title"><em>Grešnici</em> <span style="color:var(--fg-dim); font-size:0.7em;">— autorski projekt</span></div>
+        <div class="role">—</div>
+        <div class="venue">Ivana Čoh · Kufer / Teatar &amp;td</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2010</div>
+        <div class="title"><em>Saloma</em> <span style="color:var(--fg-dim); font-size:0.7em;">— prema O. Wildeu</span></div>
+        <div class="role">HEROD</div>
+        <div class="venue">Damir Zlatar Frey · INK Pula</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2010</div>
+        <div class="title"><em>Aladin</em> <span style="color:var(--fg-dim); font-size:0.7em;">— E. Kišević</span></div>
+        <div class="role">AFRIČKI VRAČ</div>
+        <div class="venue">Senka Bulić · Scena Gorica</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2010</div>
+        <div class="title"><em>Heidi</em> <span style="color:var(--fg-dim); font-size:0.7em;">— prema J. Spyri</span></div>
+        <div class="role">PETAR / GĐA ROTTENMEIER / OTAC</div>
+        <div class="venue">Ivan Leo Lemo · Kazalište Moruzgva</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2010</div>
+        <div class="title"><em>Kiklop</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Euripid / Ferčec</span></div>
+        <div class="role">SATIR</div>
+        <div class="venue">Ivica Buljan · Scena Gorica / Teatar &amp;td</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2009</div>
+        <div class="title"><em>I konje ubijaju, zar ne?</em> <span style="color:var(--fg-dim); font-size:0.7em;">— prema H. McCoyu</span></div>
+        <div class="role">BLISS</div>
+        <div class="venue">Ivica Boban · HNK Zagreb</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2009</div>
+        <div class="title"><em>Svaki pas ima svoj dan</em></div>
+        <div class="role">TATA / ŠEF</div>
+        <div class="venue">Dora Ruždjak Podolski · Kazalište Trešnja</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2007</div>
+        <div class="title"><em>Sprovod u Theresienburgu</em> <span style="color:var(--fg-dim); font-size:0.7em;">— M. Krleža</span></div>
+        <div class="role">RAMONG GEJZA</div>
+        <div class="venue">Tomislav Pavković · HNK Zagreb / HK Pečuh</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2007</div>
+        <div class="title"><em>Requiem for a Metamorphosis</em></div>
+        <div class="role">TOMB ARTIST / AIDS PATIENT</div>
+        <div class="venue">Jan Fabre · Troubleyn, Antwerpen</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2006</div>
+        <div class="title"><em>I'm a Mistake</em></div>
+        <div class="role">—</div>
+        <div class="venue">Jan Fabre Masterclass · DLJI</div>
+      </div>
+
+      <div class="work-row">
+        <div class="year">2006</div>
+        <div class="title"><em>Briljantin</em> <span style="color:var(--fg-dim); font-size:0.7em;">— Jacobs / Casey</span></div>
+        <div class="role">EUGENE</div>
+        <div class="venue">Igor Barberić · Kazalište Komedija</div>
+      </div>
+    </div>
+
+    <!-- Suradnje -->
+    <div class="collab-panel">
+      <div><h4>— REDATELJI</h4></div>
+      <div class="collab-list">
+        Vito <em>Taufer</em> &nbsp;·&nbsp; Ivan <em>Plazibat</em> &nbsp;·&nbsp; Krešimir <em>Dolenčić</em> &nbsp;·&nbsp; Paolo <em>Magelli</em> &nbsp;·&nbsp; Jan <em>Fabre</em> &nbsp;·&nbsp; Ivica <em>Buljan</em> &nbsp;·&nbsp; Ivica <em>Boban</em> &nbsp;·&nbsp; Senka <em>Bulić</em> &nbsp;·&nbsp; Damir Zlatar <em>Frey</em> &nbsp;·&nbsp; Snežana <em>Trišić</em> &nbsp;·&nbsp; Barbara <em>Rocco</em> &nbsp;·&nbsp; Vanja <em>Jovanović</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== GLAS ===================== -->
+<div class="view section-view" id="view-glas">
+  <div class="section-header">
+    <div class="section-tag">— 02 / GLAS</div>
+    <h2>Glas <em>prije</em><br>nego što ga<br>vidimo.</h2>
+    <p class="section-lede">Profesionalni voice-over, naracija, reklame, dokumentarni i korporativni formati. Iskustvo nacionalne televizije i kazališne scene spajaju tehničku preciznost, interpretaciju i osjećaj za ritam govora.</p>
+  </div>
+
+  <div class="section-content">
+
+    <div class="reels-intro">
+      <div class="block">
+        <h4>VOICE</h4>
+        <p>Reklame, dokumentarni filmovi, korporativni videi, naracije, radijski i televizijski formati.</p>
+      </div>
+      <div class="block">
+        <h4>TV / KADAR</h4>
+        <p>Iskustvo <em>voditelja i spikera</em> nacionalne televizije, uz glumački rad pred kamerom. Kamera traži točnost, mir i prisutnost; glas joj daje unutarnji ritam.</p>
+      </div>
+    </div>
+
+    <!-- Voice reels grid -->
+    <div class="reels-grid-label">
+      <span>SNIMKE — ODABIR</span>
+      <span class="hint">→ klik za reprodukciju</span>
+    </div>
+
+    <div class="reels-grid">
+      <div class="reel-tile" data-video="Tp0BahhKbho">
+        <img src="https://img.youtube.com/vi/Tp0BahhKbho/maxresdefault.jpg" alt="Voice reel" loading="lazy" onerror="this.src='https://img.youtube.com/vi/Tp0BahhKbho/hqdefault.jpg'">
+        <div class="reel-overlay">
+          <div class="play-icon"></div>
+        </div>
+        <div class="reel-tag">TV</div>
+      </div>
+
+      <div class="reel-tile" data-video="Z4qfYOvG3S8">
+        <img src="https://img.youtube.com/vi/Z4qfYOvG3S8/maxresdefault.jpg" alt="Voice reel" loading="lazy" onerror="this.src='https://img.youtube.com/vi/Z4qfYOvG3S8/hqdefault.jpg'">
+        <div class="reel-overlay">
+          <div class="play-icon"></div>
+        </div>
+        <div class="reel-tag">TV</div>
+      </div>
+
+      <div class="reel-tile" data-video="qP4823I6RfU">
+        <img src="https://img.youtube.com/vi/qP4823I6RfU/maxresdefault.jpg" alt="Voice reel" loading="lazy" onerror="this.src='https://img.youtube.com/vi/qP4823I6RfU/hqdefault.jpg'">
+        <div class="reel-overlay">
+          <div class="play-icon"></div>
+        </div>
+        <div class="reel-tag">TV</div>
+      </div>
+
+      <div class="reel-tile" data-video="XW0RsgCiLOM">
+        <img src="https://img.youtube.com/vi/XW0RsgCiLOM/maxresdefault.jpg" alt="Voice reel" loading="lazy" onerror="this.src='https://img.youtube.com/vi/XW0RsgCiLOM/hqdefault.jpg'">
+        <div class="reel-overlay">
+          <div class="play-icon"></div>
+        </div>
+        <div class="reel-tag">TV</div>
+      </div>
+
+      <div class="reel-tile" data-video="kwbiiZVC0Lc">
+        <img src="https://img.youtube.com/vi/kwbiiZVC0Lc/maxresdefault.jpg" alt="Voice reel" loading="lazy" onerror="this.src='https://img.youtube.com/vi/kwbiiZVC0Lc/hqdefault.jpg'">
+        <div class="reel-overlay">
+          <div class="play-icon"></div>
+        </div>
+        <div class="reel-tag">TV</div>
+      </div>
+
+      <div class="reel-tile short" data-video="AgYImiQWFHo" data-short="1">
+        <img src="https://img.youtube.com/vi/AgYImiQWFHo/maxresdefault.jpg" alt="Voice reel" loading="lazy" onerror="this.src='https://img.youtube.com/vi/AgYImiQWFHo/hqdefault.jpg'">
+        <div class="reel-overlay">
+          <div class="play-icon"></div>
+        </div>
+        <div class="reel-tag">SHORT</div>
+      </div>
+
+      <div class="reel-tile short" data-video="MFRPJGhzZ_E" data-short="1">
+        <img src="https://img.youtube.com/vi/MFRPJGhzZ_E/maxresdefault.jpg" alt="Voice reel" loading="lazy" onerror="this.src='https://img.youtube.com/vi/MFRPJGhzZ_E/hqdefault.jpg'">
+        <div class="reel-overlay">
+          <div class="play-icon"></div>
+        </div>
+        <div class="reel-tag">SHORT</div>
+      </div>
+    </div>
+
+    <!-- Film & TV credits -->
+    <div class="screen-credits">
+      <div class="credit-block">
+        <h4>FILM</h4>
+        <div class="credit-row">
+          <div class="credit-year">2014</div>
+          <div>
+            <div class="credit-meta"><strong>Most na kraju svijeta</strong> — Branko Istvančić</div>
+            <div class="credit-role">BERISLAV</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2011</div>
+          <div>
+            <div class="credit-meta"><strong>7sex7</strong> — Irena Škorić</div>
+            <div class="credit-role">KARLO</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2011</div>
+          <div>
+            <div class="credit-meta"><strong>Rastanak 2</strong> — Irena Škorić</div>
+            <div class="credit-role">POLICAJAC</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2011</div>
+          <div>
+            <div class="credit-meta"><strong>Lea i Darija</strong> — Branko Ivanda</div>
+            <div class="credit-role">LOUIS</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2010</div>
+          <div>
+            <div class="credit-meta"><strong>Max Schmeling</strong> — Uwe Boll</div>
+            <div class="credit-role">FARMHAND</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2010</div>
+          <div>
+            <div class="credit-meta"><strong>Scenarij za običan život</strong> — Irena Škorić</div>
+            <div class="credit-role">JOSIP HORVAT</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2007</div>
+          <div>
+            <div class="credit-meta"><strong>Kradljivci uspomena</strong> — Vicko Ruić</div>
+            <div class="credit-role">DIPLOMAT</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="credit-block">
+        <h4>TELEVIZIJA</h4>
+        <div class="credit-row">
+          <div class="credit-year">2019–20</div>
+          <div>
+            <div class="credit-meta"><strong>Drugo ime ljubavi</strong></div>
+            <div class="credit-role">RANKO FILIPOVIĆ</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2019</div>
+          <div>
+            <div class="credit-meta"><strong>Na granici</strong></div>
+            <div class="credit-role">JOZO GUZIĆ TAJSON</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2014</div>
+          <div>
+            <div class="credit-meta"><strong>Zora Dubrovačka</strong></div>
+            <div class="credit-role">STJEPAN</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2011–13</div>
+          <div>
+            <div class="credit-meta"><strong>Larin izbor</strong></div>
+            <div class="credit-role">DOKTOR</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2011</div>
+          <div>
+            <div class="credit-meta"><strong>Pod sretnom zvijezdom</strong></div>
+            <div class="credit-role">TONI</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2009</div>
+          <div>
+            <div class="credit-meta"><strong>Bitange i princeze</strong></div>
+            <div class="credit-role">TEMPO</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2008</div>
+          <div>
+            <div class="credit-meta"><strong>Zakon ljubavi</strong></div>
+            <div class="credit-role">MIHAEL BABONIĆ</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2008</div>
+          <div>
+            <div class="credit-meta"><strong>Sve će biti dobro</strong></div>
+            <div class="credit-role">KREŠIMIR ANTIĆ</div>
+          </div>
+        </div>
+        <div class="credit-row">
+          <div class="credit-year">2006</div>
+          <div>
+            <div class="credit-meta"><strong>Urota</strong></div>
+            <div class="credit-role">MONTAŽER</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== ZNANOST ===================== -->
+<div class="view section-view" id="view-znanost">
+  <div class="znanost-bg"></div>
+
+  <div class="section-header">
+    <div class="section-tag">— 03 / ZNANOST</div>
+    <h2>Što se događa<br><em>unutar</em> glumca<br>dok glumi?</h2>
+    <p class="section-lede">Doktorski i istraživački rad Marinka Leša usmjeren je prema glumi kao neurokognitivnom, emocionalnom i tjelesnom procesu. Zanima ga što se događa u glumcu tijekom izvedbe: kako nastaju pažnja, reakcija, emocija, empatija, prisutnost i odnos prema liku.</p>
+  </div>
+
+  <div class="section-content">
+
+    <div class="book-layout">
+      <div class="book-cover">
+        <img src="assets/knjiga-korice.jpg" alt="Knjiga Gluma i neuroznanost">
+      </div>
+      <div class="book-meta">
+        <div class="book-tag">KNJIGA · MONOGRAFIJA</div>
+        <h3>Gluma i <em>neuroznanost</em></h3>
+        <div class="book-pub">Naklada Ljevak · 2021. · ISBN 978-953-355-530-0</div>
+
+        <p>Doktorska disertacija objavljena kao monografija. Knjiga povezuje neurobiološka istraživanja svijesti, emocija i ponašanja s glumačkom praksom, otvarajući pitanje glume kao procesa koji nije puka imitacija, nego <em>kompleksna izvedbena aktivnost</em>.</p>
+
+        <p>U širem smislu, knjiga je uvod u kognitivne teorije izvedbe, pri čemu se kognitivnome pristupa <em>enaktivistički</em> — s pridavanjem središnjeg mjesta iskustvenoj razini uvida u stvarnost.</p>
+
+        <blockquote>
+          Razvijanje umijeća konvergentnog, bočnog mišljenja kakvo je u podlozi umjetničke kreativnosti, od velike je važnosti za inovativnost u znanosti i za tehnološki napredak.
+          <cite>— Sibila Petlevski, iz Predgovora</cite>
+        </blockquote>
+
+        <a href="https://www.ljevak.hr/gluma-i-neuroznanost" class="book-buy" target="_blank" rel="noopener">
+          <span>Kupi knjigu · Ljevak</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="book-secondary">
+      <div class="book-secondary-label">SUAUTORSTVO · POGLAVLJE</div>
+      <div class="book-cover-small">
+        <img src="assets/emocija-osjecaja.jpg" alt="Uvod u neuroznanost emocija i osjećaja">
+      </div>
+      <div class="book-secondary-meta">
+        <div class="meta">UVOD U NEUROZNANOST</div>
+        <h4>Emocija i <em>osjećaja</em></h4>
+        <div class="author"><strong>Goran Šimić</strong> i suradnici</div>
+        <div class="pub">Naklada Ljevak · 2021.</div>
+
+        <p>Suautorstvo na poglavlju o prijenosu emocija — područje u kojem se afektivna neuroznanost susreće s izvedbenom praksom.</p>
+
+        <div class="out-of-print">Rasprodano</div>
+      </div>
+    </div>
+
+    <div class="research-grid">
+      <h4>ISTRAŽIVAČKE LINIJE</h4>
+
+      <div class="science-cards">
+        <div class="science-card">
+          <div class="meta">U PRIPREMI · ZNANSTVENI RAD</div>
+          <h5>Subjektivnost <em>iskustva</em></h5>
+          <p>Razvoj rada koji ide korak dalje od Nagela — pitanje subjektivnosti iskustva kao centralni problem glume i glumačkog usvajanja lika.</p>
+        </div>
+
+        <div class="science-card">
+          <div class="meta">KONFERENCIJE</div>
+          <h5>Theatrum Mundi i <em>međunarodne</em> platforme</h5>
+          <p>Izlaganja na međunarodnom seminaru Theatrum Mundi u Dubrovniku, konferenciji Information Society u Ljubljani te međunarodnoj konferenciji u Varšavi.</p>
+        </div>
+
+        <div class="science-card">
+          <div class="meta">FORMACIJA</div>
+          <h5>Doktorat na <em>Filozofskom</em> fakultetu</h5>
+          <p>2020. Mogućnosti primjene novih neuroznanstvenih spoznaja u analizi glume. Suradnik na projektu HRZZ-a Kako praksom vođeno teorijsko istraživanje može doprinijeti hrvatskoj znanosti (2018).</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== NASTAJANJE ===================== -->
+<div class="view section-view" id="view-nastajanje">
+  <div class="section-header">
+    <div class="section-tag">— 04 / U NASTAJANJU</div>
+    <h2>U<br><em>nastajanju.</em></h2>
+    <p class="section-lede">Ovdje se okupljaju bilješke, tekstovi i kraća promišljanja nastala tijekom edukacije iz psihoterapije. Ne predstavlja ponudu psihoterapijskih usluga, nego prostor učenja, čitanja i istraživanja.</p>
+  </div>
+
+  <div class="section-content">
+    <div class="becoming-note">
+      <div class="meta">— BILJEŠKA</div>
+      <p>Trenutno na <em>propedeutici psihoterapije</em>, s interesom za gestalt i sistemski okvir.</p>
+      <p>Sekcija će rasti zajedno s edukacijom. Prostor učenja, čitanja i povezivanja.</p>
+    </div>
+
+    <div class="essay-list">
+      <div class="essay-list-label">Tekstovi</div>
+
+      <button class="essay-item" onclick="showView('essay-ludilo')">
+        <div class="essay-item-meta">04 · 2026 · ESEJ</div>
+        <div class="essay-item-title">Prihvatljivo ludilo</div>
+        <div class="essay-item-subtitle">Intersekcionalnost glumačkog identiteta</div>
+      </button>
+
+      <button class="essay-item" onclick="showView('essay-djeca')">
+        <div class="essay-item-meta">05 · 2026 · TEKST</div>
+        <div class="essay-item-title">Djeca u televizijskim natjecanjima</div>
+        <div class="essay-item-subtitle">Psihološki i razvojni rizici i potencijalne dobrobiti</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ESSAY: PRIHVATLJIVO LUDILO ===================== -->
+<div class="view essay-view" id="view-essay-ludilo">
+  <div class="essay-container">
+    <div class="essay-tag">— U NASTAJANJU / ESEJ</div>
+    <h1>Prihvatljivo ludilo</h1>
+    <div class="essay-subtitle">Intersekcionalnost glumačkog identiteta</div>
+    <div class="essay-date">Travanj 2026.</div>
+
+    <div class="essay-body">
+
+      <div class="screenplay">
+        <p class="scene-heading">INT. DVORANA FILOZOFSKOG FAKULTETA — DAN</p>
+        <p>Profesor, doktorandi prva godina.</p>
+
+        <p class="character">DOKTORANDICA 1</p>
+        <p>… i tako, činilo mi se logično da nastavim na dvojnom doktorskom studiju, ovdje i na Sorboni.</p>
+
+        <p class="character">PROFESOR</p>
+        <p class="parenthetical">(ODUŠEVLJENO!)</p>
+        <p>Sjajno, sjajno, kolegice! Puno sreće Vam želim!</p>
+        <p class="parenthetical">(I DALJE RAZDRAGANO)</p>
+        <p>A vi kolega? S kojeg ste fakulteta?</p>
+
+        <p class="character">JA</p>
+        <p>S Akademije dramske umjetnosti.</p>
+        <p class="parenthetical">(BLAGI OSMIJEH, POMALO SRAMEŽLJIV)</p>
+
+        <p class="character">PROFESOR</p>
+        <p class="parenthetical">(VIDNA PROMJENA RASPOLOŽENJA; GOTOVO IZNERVIRAN)</p>
+        <p>A vas su poslali ovdje?</p>
+
+        <p class="cut">CUT TO</p>
+
+        <p class="character">JA</p>
+        <p>Nitko me nije poslao —</p>
+
+        <p class="character">PROFESOR</p>
+        <p class="parenthetical">(VEĆ OKREĆE POGLED PREMA DRUGOM STUDENTU)</p>
+
+        <p class="character">JA (CONT'D)</p>
+        <p>— ovdje. Sam sam došao.</p>
+
+        <p class="character">PROFESOR</p>
+        <p class="parenthetical">(VEĆ JE POPRAVIO OSMIJEH I NASTAVIO)</p>
+        <p>A vi kolegice, ah da… Vas znam, Vi ste naša izvrsna…</p>
+
+        <p class="cut">CUT TO BLACK</p>
+      </div>
+
+      <div class="screenplay">
+        <p class="scene-heading">INT. MARINKOV RADNI PROSTOR — DAN</p>
+        <p>Marinko čita mail.</p>
+
+        <p class="character">JA</p>
+        <p class="parenthetical">(SJEDI ZA KOMPOM)</p>
+
+        <p class="cut" style="text-align:left;">CLOSE ON EKRAN</p>
+      </div>
+
+      <blockquote>
+        <p>Kako u Vašem mailu pronalazim interes, više na znatiželjnoj-znanstvenoj razini, želim napomenuti kako je ovo program za one koji su se odlučili promijeniti profesiju i postati psihoterapeuti/savjetodavni terapeuti. Odnosno, program podrazumijeva pripremu studenata za psihoterapijski rad sa klijentima a rad sa klijentima za većinu studenata počinje već tijekom druge godine studija.</p>
+        <p>Kako je promjena profesija velika stvar, pozivam Vas da promislite da li je to nešto što Vi želite za sebe.</p>
+        <p>Ako Vas ovo područje više zanima za osobni rast i razvoj te za primjenu u postojećoj profesiji, onda ne bih preporučila ovaj program.</p>
+        <p>Ako imate dodatnih pitanja ili komentara, slobodno mi se javite.</p>
+      </blockquote>
+
+      <div class="screenplay">
+        <p class="character">JA</p>
+        <p class="parenthetical">(GLEDA U EKRAN)</p>
+        <p class="cut">CUT TO BLACK</p>
+      </div>
+
+      <hr>
+
+      <p>Namjerno narušavam standarde akademske forme u pisanju ispitnog seminarskog rada kako bih metodološki odredio tijek i sadržaj ovog rada. Prije svega, osoban je. Možda fragmentarno prepričavan u raznim situacijama, ali nikad ispričan na način da osobna frustracija bude adekvatno sanirana ili da ju uopće razumijem u potpunosti. A drugo, koristim idealnu priliku da gotovo svakodnevne frustracije pretočim u nešto što se zove ispit. I riskiram. Već na ovom mjestu imam ispovjedni ton, opravdavajuć, ulazim u područje osobne terapije na papiru.</p>
+
+      <p>Uvodni dio, pisan kao filmski ili televizijski scenarij za seriju, želi naglasiti moj glumački identitet koji je dio ovog rada i koji je nešto što istovremeno pripada i ne pripada prostoru u kojem se nalazi. I odmah na početku ironija; film definitivno nije moj <em>forte</em>, a ni serije. Nije medij u kojem se profesionalno prepoznajem, ne mojim izborom. Nije da ih nisam nikad radio, jesam, ali ne u tolikoj mjeri da bih se time predstavljao kao glumac. Kazalište je moj (nametnut) izbor, ali kazališni tekstovi su bez identiteta, nemaju propisani font, niti veličinu, niti standard pri pisanju. Zato koristim filmski scenarij kao <em>template</em>, jer ga kazališni tekstovi naprosto nemaju. Dakle, izbor scenarističke forme nije stvar kompetencije, nego pozicije.</p>
+
+      <p>Bilo kako bilo, filmskim jezikom i alatima pokušavam artikulirati obrazac s kojim se susrećem gotovo svakodnevno, ali koji nikad nisam u potpunosti osvještavao, a još manje razumio u kontekstu intersekcionalnosti.</p>
+
+      <p>Glumački status sam po sebi, danas, u umjetničkim krugovima posjeduje neku vrstu privilegiranosti; sam upis na akademiju nije jednostavan, ulaz u redovan profesionalni život glumca također. (Nekad davno nije bilo tako. U srednjem vijeku glumci su bili marginalizirani te, povezani s nemoralom, imali status otprilike kao i prostitutke. Sahranjivali su ih na neoznačenim mjestima, daleko od posvećenog groblja.) Kad gluma postane posao, on donosi i neki novac, ponekad tek dovoljan za normalan život, ponekad i više od toga. Nosi i određenu prepoznatljivost koja godi, od pogleda i osmijeha odobravanja nepoznatog prolaznika do besplatnog stručka mladog luka na tržnici. Pišu se kritike s tvojim imenom i prezimenom (dobre i loše), monografije, programske knjižice koje se arhiviraju… Sadrži on i neke balastne pojave — medijsku izloženost, preveliku javnu dostupnost — ali to nam sad nije u fokusu. I čovjek bi rekao, u čemu je problem? Nema ga, ako se zadržimo samo na tom jednom kontekstu. I ako lik ovog rada nisam — ja.</p>
+
+      <p>Ja ni u svijet glume nisam ušao kao svi „normalni" ljudi, iz srednje škole ili za vrijeme nekog drugog studija dok se ne upiše akademija. Nisam došao na akademiju iz anonimnosti; došao sam kao televizijski voditelj i spiker nacionalne TV kuće. I otad pa sve do danas, prati me glas, tihi ili poluglasan, javan ili iza leđa, izgovoren ili neizgovoren: „ma, on je spiker!" Neupućeni idu i dalje: „a, eno onog novinara." Iako se nikad nisam bavio novinarstvom.</p>
+
+      <p>U jednom periodu svoje glumačke karijere, a nismo dugo morali čekati na tu odluku, odlučio sam povući se, ali ne u potpunosti, možda samo iz prakse, i ući u znanstveni dio glumačkog zanata i odvažio se upisati Doktorski studij na Filozofskom. U taj dio priče se uklapa ona scena s početka kad me profesor pitao „A vas su tu poslali?". Ni dan danas mi nije jasno tko bi me to poslao i s kojom namjerom. Akademija? Zašto? I zašto baš mene? Ali bilo je sasvim jasno da mi tu nije mjesto.</p>
+
+      <p>Sigurno tu ima sasvim dovoljno materijala koje ću obrađivati na svojim osobnim terapijama kroz edukaciju u nekom psihoterapijskom pravcu, jer i sam naslućujem konstantnu potrebu za promjenama i drukčijostima; nisam za doktorsku temu odabrao, recimo, stih u Držićevim djelima, niti teatrološki osvrt na izvedbe Krležinih drama u HNK Zagreb, nego sam heretički i drsko pokušao doznati što se neurobiološki događa u glumcu dok glumi i dvije godine slušao predavanja na Doktorskom studiju Neuroznanosti na Medicinskom fakultetu — uvrijedivši pritom cijeli odsjek Psihologije na Filozofskom, ne upitavši ih ništa.</p>
+
+      <p>Na Propedeutici sam oprezan; ako ne moram, ne „hvalim" se gdje radim. Iako je tamo sasvim u redu biti u nekom ekstravagantnom zanimanju poput strojarstva ili bankarskom sustavu; ne pretjerujmo sad s glumom! Tu se dogodila sličica iz druge scene našeg filmskog scenarija kad sam se drznuo pitati za uvjete u školi Transakcijske analize. Moj upit, barem ja tako mislim, ničim nije odavao dojam da mi petogodišnja edukacija iz TA treba za glumački posao, dapače, naveo sam i svoj znanstveni interes pa i interes u psihoterapijskom kontekstu. Međutim, podatak da sam glumac i to u stalnom angažmanu previše je zapao za oči edukatorici iz TA i savjetovala me da rad na sebi ipak odradim negdje drugdje.</p>
+
+      <p>O tim obrascima koji su u jednom prostoru dopušteni i dobrodošli, a u drugima se u najmanju ruku propituju, Crenshaw je pisala kroz koncept intersekcionalnosti. Iako se njezin rad odnosi na teže oblike nejednakosti i identitetske pozicije daleko ozbiljnije i relevantnije od identitetskih kriza jednog glumca, ali budući da se krećem na psihoterapijskom terenu, prisvojit ću koncept. U mom slučaju preklapanje se događa na trasi umjetničkog, akademskog i identiteta budućeg psihoterapeuta čije se vrijednosti nužno ne podudaraju, dapače, ponekad se i isključuju. Kao spiker koji ulazi u sveto područje umjetnosti, pa onda kao (ipak) glumac koji ulazi u znanost i to neuroznanstvenim temama, pa onda kao polu-glumac-polu-znanstvenik koji ulazi u psihoterapijski prostor, kao da ne pripadam intelektualnom ili akademskom plemenu jer ne dijelimo iste kriterije legitimnosti.</p>
+
+      <p>Možemo u tom kontekstu razgovarati jesam li dobar glumac, jesam li dobar znanstvenik, hoću li zbog svojih „lutanja" moći biti dobar psihoterapeut. To podrazumijeva da su moji identiteti podložni procjenama, naročito kao glumca (svakodnevno! ali to je doista za terapiju), ali u kontekstu intersekcionalnosti o kojoj govori Crenshaw identitetske kategorije ne podliježu takvoj evaluaciji; ne pita se je li on ili ona dobra crnkinja ili azijatkinja, dobar muškarac ili dobar Nijemac.</p>
+
+      <p>Pitanja granica, što je poželjno ovdje ali nije i tamo, ponašanja koja su dobrodošla u jednom kontekstu, u drugom su za hospitalizaciju, gura me prema još jednom sloju rasprave. Glumci na probama isprobavaju različite intenzitete svojih emotivnih stanja. To neupućenom promatraču može biti jako zastrašujuće (možda još više zabrinjavajuće način na koji se glumac vrlo brzo vraća u normalno stanje pa ubrzo isproba neko drugo, intenzivnije ili manje intenzivno). Na puno manje i bezazlenije ispade u pošti u redu za šalter zovemo policiju i hitnu pomoć.</p>
+
+      <p>I napokon smo došli i do naslova i zašto „Prihvatljivo ludilo". Ne otkrivam ništa novo, niti pokušavam na silu ubaciti pitanje društvenih uloga, Goffmanov koncept (kako bih otkrio još jedan svoj, do sad skriveni, identitet studenta Sociologije), već razmišljam dalje, a to je ludilo glumačkog identiteta koji se prelijeva i izvan kazališnog prostora, gdje su, naravno, emocionalni izljevi visokog potencijala poželjni i prihvaćeni kazališnom konvencijom. Govorim o općeprihvaćenom statusu glumca individualca, umjetnika koji smije i treba biti pomalo devijantan kako bi bio autentičan. To „prihvatljivo ludilo" označava isti intenzitet, isti način izražavanja, isti afekt, ali različit efekt u drugom kontekstu. U jednom, doživljava se kao autentično i zabavno, a u drugom kao višak koji treba regulirati. I zato se to „ludilo" ne mora razumjeti kao osobna karakteristika, nego kao društveno uvjetovana kategorija koja je podložna pregovorima. Nije problem postoji li odstupanje nego tko je taj koji odlučuje je li ono prihvatljivo i kad prestaje biti prihvatljivo.</p>
+
+      <p><em>Back to me</em>, slijedom svega rečenog i napisanog, ja svoje identitete ne vidim kao devijaciju, niti kao prijetnju ikome (osim samom sebi ako ne dostignem zadovoljavajuću razinu kvalitete bar u jednom identitetskom polju), već kao zadovoljenje nekih znatiželja, bježanje od rutine, ili — ako ćemo do kraja iskreno — nešto još patološkije. Tada to jest svakako materijal za obradu na terapiji, ali i dalje ostaje unutar legitimne psiho-socijalne devijacije.</p>
+
+      <p>Jesam li „previše", jesam li raspršen, tražim li sebe i nigdje se ne nalazim, pa tražim iznova i iznova — to su pitanja za moju vlastitu refleksiju i to nema veze s društvenim kontekstom u kojem se krećem. Svijet je ionako pun loših liječnika, loših vodoinstalatera, namjerno neću reći loših političara — ja zasigurno ne smetam kao još jedan loš. U kontekstu ovog rada važnije je nešto drugo — pitanje granica i na koji način se one uspostavljaju, tko ih čuva, a tko ulazi ilegalno, tko ih smije pomicati. Možda je još važnije gledati u prostor između tih granica, u liminalni prostor, gdje se svi ti identiteti razlikuju, nadopunjavaju, ispravljaju, dorađuju, surađuju, tuku, usklađuju, rađaju novi, ne i stabiliziraju, a gdje pravila (još) nisu usuglašena.</p>
+
+      <p>A možda se tamo najbolje vidi što je zapravo prihvatljivo ludilo.</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ESSAY: DJECA U TV NATJECANJIMA ===================== -->
+<div class="view essay-view" id="view-essay-djeca">
+  <div class="essay-container">
+    <div class="essay-tag">— U NASTAJANJU / TEKST</div>
+    <h1>Djeca u televizijskim natjecanjima</h1>
+    <div class="essay-subtitle">Psihološki i razvojni rizici i potencijalne dobrobiti</div>
+    <div class="essay-date">Svibanj 2026.</div>
+
+    <div class="essay-body">
+
+      <h3>Uvod</h3>
+
+      <p>Ovaj tekst pokušava sagledati aspekte i posljedice sudjelovanja djece u televizijskim emisijama natjecateljskog tipa, poput <em>The Voice Kids</em>, s naglaskom na reperkusije na mentalno zdravlje i razvojni tijek djeteta natjecatelja. Već sam naslov nedvojbeno aludira na rizike, ali istovremeno ostavlja prostor i za eventualne benefite koje takav tip natjecanja može imati.</p>
+
+      <p>Otvaranje teme već se pri samoj pripremi i prikupljanju materijala pokazalo iznimno važnim upravo zbog nedostatka istraživanja koja se bave djecom u natjecateljskim emisijama, osobito longitudinalnih. Ipak, postoji literatura koja obrađuje srodna područja — istraživanja o djeci izvođačima, medijskom utjecaju, ranom izlaganju javnosti i evaluacijskom pritisku na razvoj i mentalno zdravlje.</p>
+
+      <p>Analiza će se uglavnom bazirati na uvoznom televizijskom formatu <em>The Voice Kids Hrvatska</em>, kao lokalno važnom primjeru i medijski iznimno utjecajnom natjecanju u kojem sudjeluju djeca u dobi od 8 do 15 godina.</p>
+
+      <h2>Struktura i organizacija natjecanja</h2>
+
+      <p>U Pravilniku natjecanja objavljenom na mrežnim stranicama HRT-a navodi se kako je samo natjecanje strukturirano kao višefazni televizijski format koji uključuje predizbor, audicije, eliminacijske krugove i završno natjecanje uživo. „Kandidat/natjecatelj je maloljetna osoba od 8 do 15 godina" (HRT, 2025), a tijekom natjecanja kontinuirano su izložena evaluaciji stručnog žirija, mentora i publike. Uz televizijsko emitiranje, sadržaj se distribuira i putem digitalnih platformi i društvenih mreža, čime se izloženost višestruko širi izvan televizijskog okvira.</p>
+
+      <p>Izvan Pravilnika, u odjeljku <em>Poruka roditeljima</em>, u opuštenijem narativu ističe se „poticajno ozračje", „briga o svakom pojedinom natjecatelju", „osjećaj ponosa", „ohrabrivanje" i „doživljaj koji će se pamtiti do kraja života" (HRT, 2025) kao svojevrsni kontrapunkt pravilima (eliminacija, evaluacija, produkcijska kontrola). Navodi se i da o osnaživanju djeteta i brizi o njegovoj dobrobiti brine cijeli tim stručnjaka u koji su uključeni psiholozi i pedagozi.</p>
+
+      <p>Osim ovog evidentnog dualnog narativa koji istovremeno legitimizira natjecanje svodeći djecu na „kandidate/natjecatelje" i neutralizira eventualnu roditeljsku brigu, ima još spornih ili barem diskutabilnih dijelova u samom natječaju; za uvid u organizacijsku logiku natjecanja navedena referenca je dovoljna.</p>
+
+      <h2>Razvojna ranjivost: Piaget, Erikson, Vygotsky</h2>
+
+      <p>U kontekstu teorijskog pozicioniranja, spomenimo prvo Jeana Piageta i njegova četiri stadija kognitivnog razvoja. Budući da je raspon natjecatelja od 8 do 15 godina, prva dva Piagetova stadija (senzomotorička i predoperacijska) nećemo kontekstualizirati, već samo zadnja dva — razdoblje konkretnih operacija (7 do 11 ili 12 godina) i razdoblje formalnih operacija (više od 11 godina do odraslosti). Čak i bez dublje analize, uočavamo bitnu razvojnu razliku između djece od 8 do 11 i djece s 11 i više godina. Dijete od 8 i dijete od 15 svakako nisu na istoj razvojnoj razini, što može imati izravne implikacije na način kako interpretiraju iskustva u situacijama evaluacije i javne izloženosti, naročito prilikom eliminacije iz daljnjeg natjecanja.</p>
+
+      <p>Piaget predlaže da djeca u stadiju konkretnih operacija usmjeravaju svoje mišljenje na konkretno dostupne situacije i iskustva — odnosno, kako navode Ginsburg i Opper, u razdoblju konkretnih operacija dijete razvija logičko razmišljanje, ali ono ostaje vezano uz konkretne objekte i situacije, dok apstraktno i hipotetsko mišljenje još nije razvijeno (Ginsburg, Opper, 2016: 173). U fazi formalnih operacija dijete postaje sposobno misliti apstraktno i hipotetski te sustavno testirati hipoteze kroz kontrolu varijabli, za razliku od djece u fazi konkretnih operacija koja eksperimentiraju nesustavno (Nolen-Hoeksema et al., 2014: 78). Ako se zadržimo samo na kognitivnom razvoju kroz zadnje dvije Piagetove faze, jasno je kako se radi o heterogenoj natjecateljskoj grupi (8 do 15 godina) u kojoj bi ova posljednja mogla posjedovati kapacitete za razumijevanje natjecateljskog konteksta; međutim, bilo bi pogrešno zaključiti kako djeca od 12 godina imaju emocionalne kapacitete i zrelost jer su sposobni apstraktno misliti. Na kraju krajeva, Piagetova teorija to ni ne implicira. Iako je doživjela niz utemeljenih kritika — koje se, doduše, više odnose na podcjenjivanje sposobnosti mlađe djece — i dalje daje dobar uvid u kvalitativne razlike u razvoju, s naglaskom na kognitivni razvoj, što je samo jedna dimenzija. Otvoreno ostaje pitanje kako ta djeca sebe doživljavaju emotivno i u kontekstu javne evaluacije.</p>
+
+      <p>U cilju proširivanja analize izvan kognitivnog okvira poslužit ćemo se teorijom Erika Eriksona i njegovom psihosocijalnom perspektivom razvoja. Erikson predlaže osam faza psihosocijalnog razvoja, a za ovaj kontekst ključne su dvije — četvrta i peta. On ih naziva <em>razdoblje marljivosti nasuprot inferiornosti</em> (8 do 11 godina) i <em>razdoblje identiteta nasuprot konfuziji uloga</em> (12 do 15 godina). Ove dvije faze obuhvaćaju dob natjecatelja.</p>
+
+      <p>U četvrtoj fazi — koja, usput, odgovara fazi latencije prema Freudovoj podjeli na psihoseksualne faze — dijete razvija potrebu za postizanjem i stjecanjem priznanja kroz vlastiti rad, pri čemu uspjeh postaje izvor osjećaja kompetentnosti, dok neuspjeh može dovesti do razvoja osjećaja inferiornosti (Erikson, 1968: 92). Shaffer i suradnici dopunjavaju kako se razvoj kompetencije događa kroz usporedbu s vršnjacima (Shaffer et al., 2012: 45), te dodaje kako se u idućoj, petoj fazi, razdoblju identiteta nasuprot konfuziji, adolescent suočava s razvojnim zadatkom formiranja stabilnog identiteta, pri čemu su česti osjećaji nesigurnosti i pad samopoštovanja (Shaffer et al., 2012: 490).</p>
+
+      <p>Ovaj teorijski okvir valja zaokružiti Piagetovim kritičarem Levom Vygotskym i njegovom sociokulturnom perspektivom kognitivnog razvoja. On ga promatra kao proces u kojem dijete usvaja načine mišljenja u interakciji s kompetentnijim članovima društva, osobito putem verbalne komunikacije. Djeca najbolje uče unutar zone proksimalnog razvoja, odnosno u prostoru između onog što dijete može učiniti samo i onoga što može postići uz asistenciju (Shaffer et al., 2020: 56). Ono što je još zanimljivije za naš kontekst jest teorija koja je nastala iz Vygotskyjeva koncepta, a to je pojam <em>scaffolding</em> (Wood, Bruner, Ross, 1976), svojevrsne skele, odnosno potporne strukture; opisuje situaciju učenja gdje kompetentniji vodi manje kompetentnog.</p>
+
+      <p>Zastanimo na tren i promislimo malo o ulozi kompetentnijeg. Vygotsky zasigurno misli na kompetentnog u službi djeteta. Tko je to u televizijskom natjecanju? Žiri, vokalni treneri, produkcija, roditelji djece? Pojam <em>scaffoldinga</em> označava podršku koja se uvodi u početku učenja, a postepeno povlači kako se stječe sigurnost. Naglasak je na postepenoj razgradnji te skele. Upravo ta skela i postoji u benevolentnosti svih uključenih u realizaciju TV emisije; ali pitanje je što se događa kad emisija završi — skela se naglo urušava s gašenjem reflektora.</p>
+
+      <p>Unutar ovog teorijskog okvira uviđamo da se ne radi o razdoblju razvoja djeteta koje bismo trebali olako shvatiti: Piaget nam sugerira da su razlike u kognitivnom razvoju značajne unutar dobnog raspona između 8 i 15 godina te da starija djeca u toj grupi, iako kognitivno zrelija, ne raspolažu nužno emocionalnom stabilnošću. Erikson nam pak ukazuje da su upravo ta djeca posebno osjetljiva na procjenu vlastite vrijednosti kroz uspjeh i neuspjeh, dok Vygotsky naglašava da se taj razvoj događa unutar socijalnih odnosa, kroz podršku kompetentnijih drugih. U televizijskom natjecanju koncept <em>scaffoldinga</em>, oblika prilagođene podrške, jest prisutan, no on je funkcionalno i vremenski ograničen trajanjem emisije, što otvara pitanje buduće potpore u slučaju problematične naknadne reakcije. Stoga televizijski format u kojem se natječu djeca ove dobne skupine, iako može pružiti doživotno iskustvo „za pamćenje", može imati i potencijalne rizike s obzirom na način na koji djeca interpretiraju vlastiti uspjeh i neuspjeh dok su pritom javno izložena.</p>
+
+      <h2>Privrženost, samoregulacija, razvoj prefrontalnog korteksa</h2>
+
+      <p>Prethodni teorijski okvir valja nadopuniti teorijom privrženosti čiji je začetnik John Bowlby, a nadopunila ju je Mary Ainsworth. Ona opisuje obrasce s kojima su mladi kandidati već ušli u natjecanje, budući da se usvajaju u ranim razdobljima djeteta. Riječ je o sigurnim, ambivalentnim/anksioznim, izbjegavajućim i dezorganiziranim obrascima koji se kasnije ispoljavaju — ne samo u razvojnom periodu djetinjstva, nego i u ostatku života, kao istovjetni stilovi privrženosti. Prema Bowlbyju, dijete kroz rana iskustva s primarnim skrbnikom oblikuje trajnu emocionalnu vezu koja mu služi kao sigurna baza u odsutnosti roditelja. Na taj način stvara se tzv. unutarnji radni model, odnosno skup očekivanja o dostupnosti figura privrženosti i njihovoj spremnosti da pruže podršku u situacijama stresa. Taj model postaje važan dio osobnosti i vodič za kasnije odnose (Berk, 2015: 197–198; prema Bretherton i Munholland, 2008).</p>
+
+      <p>Ukratko, djeca ne ulaze u natjecanje bez očekivanja od odraslih. I ne ulaze na jednak način. Za pretpostaviti je da će djeca sa sigurnim obrascem privrženosti odrasle osobe u produkcijskom timu doživjeti kao izvore podrške i da će kritiku i eventualnu eliminaciju lakše integrirati kao dio natjecateljskog iskustva. Dok bi dijete s ambivalentnim/anksioznim obrascem moglo snažnije izražavati potrebu za potvrdom odraslih, a kad ona izostane, neuspjeh jače povezati s vlastitom vrijednošću. Ovdje nije namjera klasificiranje, niti dijagnosticiranje djece, već upozoriti kako televizijski format može imati različite psihološke utjecaje, ovisno o prethodno stečenim obrascima privrženosti.</p>
+
+      <p>Iako teorija privrženosti ne spada u suvremena teorijska dostignuća razvojne psihologije, naširoko je prihvaćena i nadopunjavana suvremenim neurobiološkim saznanjima. Pa ju tako u ovom kontekstu možemo proširiti neuro-razvojnom perspektivom Daniela Siegela, prema kojem se um ne može promatrati odvojeno od odnosa i mozga, pritom naglašavajući da razvoj mozga nije uvjetovan samo biološkim čimbenicima, nego i iskustvom, osobito u interpersonalnim odnosima (Siegel, 2012: 3–5). Posebno je važna njegova tvrdnja da socijalna iskustva mogu izravno oblikovati neuralnu arhitekturu, odnosno da relacijske veze oblikuju neuralne veze (Siegel, 2012: 15). Tko god je ikad sudjelovao u bilo kakvoj televizijskoj produkciji, naročito u programu uživo, zna koliko je uzbuđenja i treme prisutno i kod odraslih, emocionalno izreguliranih i ostvarenih osoba — pa tako ni dječje sudjelovanje ne treba shvatiti nužno kao prolaznu zabavnu epizodu. Javni nastup, evaluacija, pohvala, kritika, javno odbacivanje (zamotano u tisuće šarenih celofana) mogu sudjelovati u oblikovanju djetetovih obrazaca emocionalne regulacije, samopoimanja i samopouzdanja.</p>
+
+      <p>Toj neurobiološkoj perspektivi treba dodati i znanstvene nalaze koji ukazuju na to kako je mozak u adolescenata i dalje u izgradnji — ne samo prefrontalni korteks, već i limbički sustav (Arain et al., 2013). Isti rad navodi kako adolescenti često tuđe emocije čitaju netočno te kako se potpuni razvoj prefrontalnog korteksa očekuje tek u dobi od 25 godina. Dakle, sustav koji je povezan s emocijama, motivacijom, nagradom, donošenjem odluka i rizičnim ponašanjem, i drugi sustav koji regulira prosudbu i samoregulaciju, zadužen za izvršne funkcije i inhibiciju impulsa — ta dva odvojena sustava, a opet u neprekidnoj suradnji — sazrijevaju puno kasnije nego što je gornja dob mogućeg kandidata za ovaj TV format. Nedvojbeno, dijete može razumjeti pravila natjecanja, ali može li emocionalno obraditi neuspjeh na način odrasle osobe i može li razlikovati „nisam prošao dalje" od „nisam dovoljno vrijedan".</p>
+
+      <h2>S druge strane: argument za frustraciju</h2>
+
+      <p>Dosad se naglasak stavljao na potencijalne razvojne rizike, no valjalo bi izbjeći jednostranost i zaključak kako je neuspjeh sam po sebi štetan za djecu. Upravo suprotno: dječja frustracija pretpostavlja susret s izazovima, odgodom zadovoljstva, granicama i iskustvima neuspjeha kao povoljnim čimbenikom razvoja. Rezilijentnost osnaživana u toj dobi stvara kapacitete za hvatanje u koštac s problemima i u odrasloj dobi; naprosto, uči se životu. Brojni su radovi koji govore tome u prilog — pa tako Masten rezilijentnost opisuje kao <em>ordinary magic</em>, odnosno kao uobičajen razvojni proces pozitivne prilagodbe (Masten, 2001). Slično, Seery, Holman i Silver pokazuju da umjerena izloženost životnim teškoćama može biti kasnije povezana s boljim mentalnim zdravljem i većom otpornošću (Seery et al., 2010). U tom smislu, televizijsko natjecanje može imati poticajnu snagu razvoja u kontekstu samopouzdanja, osjećaja zdrave kompeticije, prihvaćanja kritike i osjećaja pripadnosti grupi vršnjaka sličnih interesa. Iskustvo nastupa pred mnogobrojnom publikom može imati pozitivne učinke kao izvor ponosa i potvrde, naročito ako je praćeno dosljednom podrškom roditelja, mentora i stručnog tima — i upravo tu leži presudna razlika između razvojno korisne frustracije i potencijalno štetne koja može ostaviti posljedice.</p>
+
+      <p>Iz ove perspektive, odgovornost televizijske produkcije nije samo u privlačenju mladih talenata da dožive „najljepše iskustvo svog života", nego da unaprijed predvide sve mogućnosti negativnih emocionalnih reakcija i da se kontinuitet podrške proširi i nakon emisije. Rezilijentnost se stvara kad dijete dobiva pomoć razumjeti, procesirati i regulirati stres, odbacivanje i javni sud. Ovakav televizijski format nije nužno štetan i mnoga djeca će ga doživjeti kao ultimativno iskustvo, no ne treba ga promatrati niti kao razvojno neutralno.</p>
+
+      <p>Možemo se kratko osvrnuti i na drugi tip natjecanja. Činjenica jest da se djeca natječu i u drugim kontekstima — sportskim ili državnim natjecanjima, recimo, iz violine ili dramskih sekcija, koji također uključuju evaluaciju i neuspjeh. No, ključna razlika je u razmjeru izloženosti. Sportska natjecanja su česta i sastavni su dio treninga. Ali publika je ograničena na nekoliko desetaka roditelja i nastavnika koji sudjeluju u djetetovu razvoju, što je uvelike različito od milijunske televizijske publike i anonimnih komentatora s interneta. Pitanje, dakle, nije treba li djecu izlagati neuspjehu, već tko je uz njih kad se on dogodi.</p>
+
+      <p>Budući da ovaj tekst ima svoja ograničenja u opsegu, neće se dalje analizirati aspekt roditeljske ambicije, kao ni utjecaj društvenih mreža za vrijeme i nakon snimanja. Ipak, može poslužiti kao poticaj za ambiciozniji rad i istraživanje longitudinalnog tipa.</p>
+
+      <div class="references">
+        <h3 style="color: var(--fg-muted); margin-bottom: 24px;">Literatura</h3>
+
+        <p>Arain, M., Haque, M., Johal, L., Mathur, P., Nel, W., Rais, A., Sandhu, R., &amp; Sharma, S. (2013). Maturation of the adolescent brain. <em>Neuropsychiatric Disease and Treatment, 9</em>, 449–461.</p>
+
+        <p>Berk, L. E. (2015). <em>Child development</em> (9th ed.). Pearson.</p>
+
+        <p>Erikson, E. H. (1968). <em>Identity: Youth and crisis</em>. W. W. Norton.</p>
+
+        <p>Ginsburg, H. P., &amp; Opper, S. (2016). <em>Piaget's theory of intellectual development</em> (3rd ed.). International Psychotherapy Institute.</p>
+
+        <p>HRT. (2025). <em>Pravila natjecanja The Voice Kids Hrvatska</em>. Hrvatska radiotelevizija.</p>
+
+        <p>HRT. (2025). <em>The Voice Kids Hrvatska: Poruka roditeljima</em>. Hrvatska radiotelevizija.</p>
+
+        <p>Masten, A. S. (2001). Ordinary magic: Resilience processes in development. <em>American Psychologist, 56</em>(3), 227–238.</p>
+
+        <p>Nolen-Hoeksema, S., Fredrickson, B. L., Loftus, G. R., &amp; Lutz, C. (2014). <em>Atkinson &amp; Hilgard's introduction to psychology</em> (16th ed.). Cengage Learning EMEA.</p>
+
+        <p>Seery, M. D., Holman, E. A., &amp; Silver, R. C. (2010). Whatever does not kill us: Cumulative lifetime adversity, vulnerability, and resilience. <em>Journal of Personality and Social Psychology, 99</em>(6), 1025–1041.</p>
+
+        <p>Shaffer, D. R., Kipp, K., Wood, E., &amp; Willoughby, T. (2012). <em>Developmental psychology: Childhood and adolescence</em> (4th Canadian ed.). Nelson Education.</p>
+
+        <p>Siegel, D. J. (2012). <em>The developing mind: How relationships and the brain interact to shape who we are</em> (2nd ed.). The Guilford Press.</p>
+
+        <p>Wood, D., Bruner, J. S., &amp; Ross, G. (1976). The role of tutoring in problem solving. <em>Journal of Child Psychology and Psychiatry, 17</em>(2), 89–100.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PHOTO LIGHTBOX ===================== -->
+<div class="photo-modal" id="photoModal" onclick="closePhotoModalOnBackdrop(event)">
+  <div class="photo-modal-inner">
+    <button class="photo-modal-close" onclick="closePhotoModal()">ZATVORI ✕</button>
+    <button class="photo-modal-nav prev" onclick="navigatePhoto(-1)" aria-label="Prethodna">‹</button>
+    <button class="photo-modal-nav next" onclick="navigatePhoto(1)" aria-label="Sljedeća">›</button>
+    <img id="photoModalImg" src="" alt="">
+    <div class="photo-modal-meta">
+      <div class="photo-modal-role" id="photoModalRole"></div>
+      <div class="photo-modal-title" id="photoModalTitle"></div>
+      <div class="photo-modal-dir" id="photoModalDir"></div>
+      <div class="photo-modal-credit">FOTOGRAFIJA · <span>MARKO ERCEGOVIĆ</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== VIDEO MODAL ===================== -->
+<div class="video-modal" id="videoModal" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-inner" id="modalInner">
+    <button class="modal-close" onclick="closeVideoModal()">ZATVORI ✕</button>
+    <iframe id="modalIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  function showView(viewName) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    const target = document.getElementById('view-' + viewName);
+    if (target) target.classList.add('active');
+
+    const backBtn = document.querySelector('.back-btn');
+    if (viewName === 'preview') {
+      backBtn.classList.remove('visible');
+    } else {
+      backBtn.classList.add('visible');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // closing any open video on navigation
+    closeVideoModal();
+  }
+
+  // Video modal
+  const modal = document.getElementById('videoModal');
+  const modalIframe = document.getElementById('modalIframe');
+  const modalInner = document.getElementById('modalInner');
+
+  document.querySelectorAll('.reel-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      const vid = tile.dataset.video;
+      const isShort = tile.dataset.short === '1';
+      modalInner.classList.toggle('short', isShort);
+      modalIframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0`;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeVideoModal() {
+    modal.classList.remove('active');
+    modalIframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnBackdrop(e) {
+    if (e.target === modal) closeVideoModal();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeVideoModal();
+  });
+
+  // Horizontal scroll for photo strip - wheel to horizontal
+  const strip = document.getElementById('photoStrip');
+  if (strip) {
+    strip.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        strip.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  }
+
+  // Photo lightbox
+  const photoModal = document.getElementById('photoModal');
+  const photoModalImg = document.getElementById('photoModalImg');
+  const photoModalRole = document.getElementById('photoModalRole');
+  const photoModalTitle = document.getElementById('photoModalTitle');
+  const photoModalDir = document.getElementById('photoModalDir');
+  const photoTiles = Array.from(document.querySelectorAll('.photo-tile'));
+  let currentPhotoIndex = -1;
+
+  function openPhotoModal(index) {
+    const tile = photoTiles[index];
+    if (!tile) return;
+    const img = tile.querySelector('img');
+    const role = tile.querySelector('.photo-role');
+    const title = tile.querySelector('.photo-title');
+    const dir = tile.querySelector('.photo-dir');
+
+    photoModalImg.src = img.src;
+    photoModalImg.alt = img.alt;
+    photoModalRole.textContent = role ? role.textContent : '';
+    photoModalTitle.textContent = title ? title.textContent : '';
+    photoModalDir.textContent = dir ? dir.textContent : '';
+
+    photoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    currentPhotoIndex = index;
+  }
+
+  function closePhotoModal() {
+    photoModal.classList.remove('active');
+    document.body.style.overflow = '';
+    currentPhotoIndex = -1;
+  }
+
+  function closePhotoModalOnBackdrop(e) {
+    if (e.target === photoModal) closePhotoModal();
+  }
+
+  function navigatePhoto(direction) {
+    if (currentPhotoIndex < 0) return;
+    const newIndex = (currentPhotoIndex + direction + photoTiles.length) % photoTiles.length;
+    openPhotoModal(newIndex);
+  }
+
+  photoTiles.forEach((tile, i) => {
+    tile.addEventListener('click', () => openPhotoModal(i));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!photoModal.classList.contains('active')) return;
+    if (e.key === 'Escape') closePhotoModal();
+    if (e.key === 'ArrowLeft') navigatePhoto(-1);
+    if (e.key === 'ArrowRight') navigatePhoto(1);
+  });
+</script>
+
+</body>
+</html>
